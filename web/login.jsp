@@ -13,22 +13,7 @@
     <link href="static/css/bootswatchsl.css" rel="stylesheet">
     <link href="static/css/signin.css" rel="stylesheet">
   </head>
-<script>
-  function checkPasswordMatch() {
-    var password = $("#password").val();
-    var confirmPassword = $("#password-confirm").val();
 
-    if (password != confirmPassword)
-        $("#divCheckPasswordMatch").html("Passwords do not match!");
-    else
-        $("#divCheckPasswordMatch").html("Passwords match.");
-  }
-
-  $(document).ready(function () {
-     $("#password-confirm").keyup(checkPasswordMatch);
-  });
-  
-</script>
 <style type="text/css">
   .verticalLine {
     border-left: thick solid #fff000;
@@ -95,7 +80,7 @@
                     <br>
                     <input type="password" class="form-control" name="password" placeholder="Password"  required>
                     <br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <button class="btn btn-lg btn-primary btn-block">Sign in</button>
                   </form>
                   <div class = "row form-signin" style="padding-top:1em; padding-bottom:1em; font-size: 16px">
                     Don't have an account? Register first!
@@ -115,10 +100,12 @@
                     <br>
                     <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
                     <br>
-                    <input type="password" class="form-control" name="password" placeholder="Password"  required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password"  required>
                     <br>
-                    <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password"  required>
-                    <br>
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" onChange="checkPasswordMatch();" placeholder="Confirm Password"  required>
+                    <span id="divCheckPasswordMatchError" class="text-danger"></span>
+                    <span id="divCheckPasswordMatchSuccess" class="text-success"></span>
+                    <br><br>
                     <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
                   </form>
                 </div>
@@ -136,5 +123,21 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="static/js/jquery.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
+    <script>
+      function checkPasswordMatch() {
+        var password = $("#password").val();
+        var confirmPassword = $("#confirm-password").val();
+
+        if (password != confirmPassword) {
+          $("#divCheckPasswordMatchError").html("Passwords do not match!");
+          $("#divCheckPasswordMatchSuccess").html("");
+        }
+        else {
+          $("#divCheckPasswordMatchError").html("");
+          $("#divCheckPasswordMatchSuccess").html("Passwords match.");
+        }
+      }
+
+    </script>
   </body>
 </html>
