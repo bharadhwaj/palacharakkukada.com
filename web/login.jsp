@@ -71,22 +71,21 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div>
-          
+          <!-- Nav tabs -->
+          <ul class="nav nav-tab nav-justified" role="tablist">
+            <li role="presentation" class="active toggle">
+              <a href="#login" aria-controls="login" role="tab" data-toggle="tab"><h3>Login</h3></a>
+            </li>
+            <li role="presentation">
+              <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab"><h3>Signup</h3></a>
+            </li>
+          </ul>
 
           <!-- Tab panes -->
           <div class="tab-content">
-            <!-- Nav tabs -->
-          <ul class="nav nav-tabs nav-justified" role="tablist">
-            <li role="presentation" class="active">
-              <a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a>
-            </li>
-            <li role="presentation">
-              <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Signup</a>
-            </li>
-          </ul>
             <div role="tabpanel" class="tab-pane fade in active" id="login">
-              <div class="panel panel-default">
-                <div class="panel-body">
+              <div class="panels panel-default">
+                <div class="panels-body">
                   <center>
                     <h1 style="color:#2A515E"><b>Login</b></h1>
                   </center>
@@ -105,8 +104,8 @@
               </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="signup">
-              <div class="panel panel-default">
-                <div class="panel-body">
+              <div class="panels panel-default">
+                <div class="panels-body">
                   <center>
                     <h1 style="color:#2A5E2A"><b>Sign up</b></h1>
                   </center>
