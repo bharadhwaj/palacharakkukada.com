@@ -63,63 +63,79 @@
     </div>
   </div><!-- /.container-fluid -->
 </nav>
-    <div class="container" style="padding-top:60px;">
-      <div class="row">
 
-        <div class="col-lg-5">
-          <div class="panel panel-default">
-    
-            <div class="panel-body">
-              <center>
-                <h1 style="color:#2A515E"><b>Login</b></h1>
-              </center>
-              <hr>
-              <form class="form-signin" role="login" action="login" method="post">
-                <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
-                <br>
-                <input type="password" class="form-control" name="password" placeholder="Password"  required>
-                <br>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-              </form>
-              <div class = "row form-signin" style="padding-top:1em; padding-bottom:1em; font-size: 16px">
-                Don't have an account? Register first!
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div>
+          
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a>
+            </li>
+            <li role="presentation">
+              <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Signup</a>
+            </li>
+          </ul>
+            <div role="tabpanel" class="tab-pane fade in active" id="login">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <center>
+                    <h1 style="color:#2A515E"><b>Login</b></h1>
+                  </center>
+                  <hr>
+                  <form class="form-signin" role="login" action="login" method="post">
+                    <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
+                    <br>
+                    <input type="password" class="form-control" name="password" placeholder="Password"  required>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                  </form>
+                  <div class = "row form-signin" style="padding-top:1em; padding-bottom:1em; font-size: 16px">
+                    Don't have an account? Register first!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="signup">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <center>
+                    <h1 style="color:#2A5E2A"><b>Sign up</b></h1>
+                  </center>
+                  <hr>
+                  <form class="form-signin" role="login" action="login" method="post">
+                    <input type="text" class="form-control" name="name" placeholder="Name" required autofocus>
+                    <br>
+                    <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
+                    <br>
+                    <input type="password" class="form-control" name="password" placeholder="Password"  required>
+                    <br>
+                    <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password"  required>
+                    <br>
+                    <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-1">
-        </div>
-        <div class="col-lg-5">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <center>
-                <h1 style="color:#2A5E2A"><b>Sign up</b></h1>
-              </center>
-              <hr>
-              <form class="form-signin" role="login" action="login" method="post">
-                <input type="text" class="form-control" name="name" placeholder="Name" required autofocus>
-                <br>
-                <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
-                <br>
-                <input type="password" class="form-control" name="password" placeholder="Password"  required>
-                <br>
-                <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password"  required>
-                <br>
-                <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
-              </form>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div> <!-- /container -->
+        </div> 
+      </div> <!-- col-md-8 col-md-offset-2-->
+    </div> <!-- row -->
+  </div><!-- container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<script src="static/js/jquery.js"></script>
+    <script src="static/js/jquery.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
   </body>
 </html>
