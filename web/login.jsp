@@ -13,6 +13,22 @@
     <link href="static/css/bootswatchsl.css" rel="stylesheet">
     <link href="static/css/signin.css" rel="stylesheet">
   </head>
+<script>
+  function checkPasswordMatch() {
+    var password = $("#password").val();
+    var confirmPassword = $("#password-confirm").val();
+
+    if (password != confirmPassword)
+        $("#divCheckPasswordMatch").html("Passwords do not match!");
+    else
+        $("#divCheckPasswordMatch").html("Passwords match.");
+  }
+
+  $(document).ready(function () {
+     $("#password-confirm").keyup(checkPasswordMatch);
+  });
+  
+</script>
 <style type="text/css">
   .verticalLine {
     border-left: thick solid #fff000;
