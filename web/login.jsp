@@ -54,6 +54,7 @@
               <div class="panels panel-default">
                 <div class="panels-body">
                   <form class="form-signin" role="login" action="login" method="post">
+                    <input type="hidden" name="form" value="login">
                     <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
                     <br>
                     <input type="password" class="form-control" name="password" placeholder="Password"  required>
@@ -71,18 +72,21 @@
                 <div class="panels-body">
 
                   <form class="form-signin" role="login" action="login" method="post">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" required autofocus>
+
+                    <input type="hidden" name="form" value="signin">
+                    <input type="text" class="form-control" name="name" placeholder="Name" required autofocus>
                     <br>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required autofocus>
                     <br>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" onChange="checkPasswordMatch();" required>
                     <br>
                     <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
 
                     <span id="divCheckPasswordMatchError" class="text-danger"></span>
                     <span id="divCheckPasswordMatchSuccess" class="text-success"></span>
                     <br><br>
-                    <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
+                    <button class="btn btn-lg btn-success btn-block disabled" type="submit" id="submitButton">Sign up</button>
                   </form>
                 </div>
               </div>
@@ -107,12 +111,15 @@
         if (password != confirmPassword) {
           $("#divCheckPasswordMatchError").html("Passwords do not match!");
           $("#divCheckPasswordMatchSuccess").html("");
+          $('#submitButton').addClass("disabled");
         }
         else {
           $("#divCheckPasswordMatchError").html("");
           $("#divCheckPasswordMatchSuccess").html("Passwords match.");
+          $('#submitButton').removeClass("disabled");
         }
       }
+      
 
     </script>
   </body>
