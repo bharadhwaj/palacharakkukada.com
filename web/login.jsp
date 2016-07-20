@@ -79,9 +79,9 @@
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required autofocus>
                     <br>
 
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" onChange="checkPasswordMatch();" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                     <br>
-                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm Password" onChange="checkPasswordMatch();"required>
 
                     <span id="divCheckPasswordMatchError" class="text-danger"></span>
                     <span id="divCheckPasswordMatchSuccess" class="text-success"></span>
