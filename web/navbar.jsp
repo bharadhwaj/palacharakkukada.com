@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-6">
@@ -10,7 +10,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">palacharakkukada.com</a>
+          <a href="/palacharakkukada.com/index.jsp">
+            <img src="static/images/logo_navbar.png">
+          </a>
+          <a class="navbar-brand" href="/palacharakkukada.com/index.jsp">
+            palacharakkukada.com
+          </a>
         </div>
 
       </div><!-- /.navbar-collapse -->
@@ -20,7 +25,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search for...">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-default" type="button">
                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
               </span>

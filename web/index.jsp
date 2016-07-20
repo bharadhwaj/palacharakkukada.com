@@ -10,7 +10,7 @@
     <title>Welcome to Palacharakkukada.com</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/css/bootswatchsl.css" rel="stylesheet">
+    <link href="static/css/bootswatchce.css" rel="stylesheet">
     <link href="static/css/signin.css" rel="stylesheet">
   </head> 
 
@@ -29,19 +29,19 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://placehold.it/1500x300" alt="...">
+        <img src="https://placehold.it/1400x300" alt="...">
         <div class="carousel-caption">
           Our new product 1.
         </div>
       </div>
       <div class="item">
-        <img src="https://placehold.it/1500x300" alt="...">
+        <img src="https://placehold.it/1400x300" alt="...">
         <div class="carousel-caption">
           Our new product 2.
         </div>
       </div>
       <div class="item">
-        <img src="https://placehold.it/1500x300" alt="...">
+        <img src="https://placehold.it/1400x300" alt="...">
         <div class="carousel-caption">
           Our new product 3.
         </div>
@@ -60,6 +60,20 @@
   </div>
   <!-- Carousel ends here. -->
 
+  <!-- Product description starts here -->
+  <!-- <div class="row" script="padding-top:10px;">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="https://placehold.it/242x200" alt="...">
+        <div class="caption">
+          <h3>Thumbnail label</h3>
+          <p>...</p>
+          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Product description ends here -->
 
 
   
