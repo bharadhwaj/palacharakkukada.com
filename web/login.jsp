@@ -26,6 +26,7 @@
 
 
 
+      <jsp:include page="flash.jsp" />
 
 <div class="container" style="padding-top:30px;">
     <div class="row">

@@ -95,7 +95,9 @@ public class login extends HttpServlet {
                     session.setAttribute("username",name);
                     response.sendRedirect("index.jsp");
                 }else {
-                    response.sendRedirect("login.jsp");
+                    request.setAttribute("category","danger");
+                    request.setAttribute("message","Invalid emailID or password");
+                    request.getRequestDispatcher("login.jsp").forward(request,response);
                 }
                 
             } else {
