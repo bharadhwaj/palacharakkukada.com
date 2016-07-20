@@ -6,6 +6,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -75,9 +77,22 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+
+        Path currentRelativePath = Paths.get("");
+        String path = currentRelativePath.toAbsolutePath().toString();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("jdbc:sqlite:");
+        stringBuilder.append(path);
+        stringBuilder.append("/palacharakkukada.db");
+
+        String dbUrl = stringBuilder.toString();
+        
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection("jdbc:sqlite:/home/anil/palacharakkukada.db");
+
+            Connection con = DriverManager.getConnection(dbUrl);
             String form = request.getParameter("form");
             if(form.equals("login")) {
                 String email = request.getParameter("email");
