@@ -5,8 +5,8 @@
     top:0px;
     left:0px;
     z-index:9999; 
-    border-radius:0px
-    background: rgba(0,0,0,0.3)
+    border-radius:0px;
+    background-color: rgba(0,0,0,0.3);
 
 }
 </style>
@@ -22,7 +22,6 @@
         <%
             if(session.getAttribute("messages") != null) {
             ArrayList<ArrayList<String>> messages = (ArrayList<ArrayList<String>>)session.getAttribute("messages");
-            System.out.println(messages.get(0).get(0));
         %>
       <ul class="list-unstyled" > 
         <% for(ArrayList<String> message: messages){%>
