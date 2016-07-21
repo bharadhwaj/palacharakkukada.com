@@ -24,7 +24,11 @@
 </style>
   <body>
 
-
+      <%
+          if(session.getAttribute("username") != null){
+              response.sendRedirect("index.jsp");
+          }
+      %>
 
       <jsp:include page="flash.jsp" />
 
