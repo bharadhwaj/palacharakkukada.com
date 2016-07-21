@@ -1,6 +1,23 @@
 <%@page import="java.util.ArrayList"%>
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+<style type="text/css">
+.alert-fixed {
+    position:fixed;  
+    top:0px;
+    left:0px;
+    z-index:9999; 
+    border-radius:0px
+    background: rgba(0,0,0,0.3)
+
+}
+</style>
+<script type="text/javascript">
+  setTimeout(function() {
+    $("#alertPopup").fadeOut().empty();
+  }, 3000);
+</script>
+
+<div id="alertPopup">
+  <div class="col-md-6 col-md-offset-3 alert-fixed">
     <p>
         <%
             if(session.getAttribute("messages") != null) {

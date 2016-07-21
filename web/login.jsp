@@ -24,15 +24,16 @@
 </style>
   <body>
 
-      <%
+
+
+<div class="container" style="padding-top:30px;">
+        <%
           if(session.getAttribute("username") != null){
               response.sendRedirect("index.jsp");
           }
       %>
 
       <jsp:include page="flash.jsp" />
-
-<div class="container" style="padding-top:30px;">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <center>
