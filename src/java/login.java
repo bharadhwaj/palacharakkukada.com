@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -111,8 +112,13 @@ public class login extends HttpServlet {
                     session.setAttribute("username",name);
                     response.sendRedirect("index.jsp");
                 }else {
-                    request.setAttribute("category","danger");
-                    request.setAttribute("message","Invalid emailID or password");
+                    ArrayList<ArrayList<String>> errors = new ArrayList<ArrayList<String>>();
+                    ArrayList<String> error = new ArrayList<String>();
+                    error.add("danger");
+                    error.add("Invalid emailID or password");
+                    errors.add(error);
+                    request.setAttribute("errors",errors);
+                    //request.setAttribute("message","Invalid emailID or password");
                     request.getRequestDispatcher("login.jsp").forward(request,response);
                 }
                 
