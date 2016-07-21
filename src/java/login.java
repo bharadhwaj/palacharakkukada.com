@@ -89,6 +89,7 @@ public class login extends HttpServlet {
 
         String dbUrl = stringBuilder.toString();
         
+        
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -134,6 +135,7 @@ public class login extends HttpServlet {
             }
         } catch(Exception e) {
             System.err.println(e);
+            System.out.println(dbUrl);
             response.sendRedirect("login.jsp");
         }
     }

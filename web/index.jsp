@@ -15,7 +15,13 @@
   </head> 
 
 <body>
-  <jsp:include page="navbar.jsp" />
+    <%
+        String username = "";
+        if(session.getAttribute("username") != null) {
+            username = (String) session.getAttribute("username");
+        }
+    %>
+    <jsp:include page="navbar.jsp" />
   
   <!-- Carousel Starts here. -->     
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -76,7 +82,7 @@
   <!-- Product description ends here -->
 
 
-  
+  <b> <%=username %> </b>
 </body>
 
 
