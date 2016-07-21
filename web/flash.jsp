@@ -5,8 +5,7 @@
     top:0px;
     left:0px;
     z-index:9999; 
-    border-radius:0px
-    background: rgba(0,0,0,0.3)
+    border-radius:0px;
 
 }
 </style>
