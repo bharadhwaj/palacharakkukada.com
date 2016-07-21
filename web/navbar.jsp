@@ -9,7 +9,6 @@
       </button>
       <a class="navbar-brand" href="/palacharakkukada.com/index.jsp">palacharakkukada.com</a>
     </div>
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
@@ -38,7 +37,26 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+      <%
+          String username = "Login";
+          if(session.getAttribute("username") != null) {
+              username = (String) session.getAttribute("username");
+      %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Edit Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+      <% 
+          } 
+          else { 
+      %>
+      <li><a href="/palacharakkukada.com/login.jsp">Login</a></li>
+      <% 
+          } 
+      %>
       </ul>
     </div>
   </div>
