@@ -120,7 +120,7 @@ public class login extends HttpServlet {
                 }else {
                     
                     message.add("danger");
-                    message.add("Invalid emailID or password");
+                    message.add("Invalid email or password");
                     messages.add(message);
                     request.setAttribute("messages",messages);
                     //request.setAttribute("message","Invalid emailID or password");
