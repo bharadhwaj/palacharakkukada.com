@@ -31,8 +31,8 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws ServletException if a servlet-specific message occurs
+     * @throws IOException if an I/O message occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -57,13 +57,13 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws ServletException if a servlet-specific message occurs
+     * @throws IOException if an I/O message occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -71,8 +71,8 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws ServletException if a servlet-specific message occurs
+     * @throws IOException if an I/O message occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -89,8 +89,9 @@ public class login extends HttpServlet {
         stringBuilder.append("/palacharakkukada.db");
 
         String dbUrl = stringBuilder.toString();
-        
-        
+        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
+        ArrayList<String> message = new ArrayList<String>();
+                
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -110,14 +111,18 @@ public class login extends HttpServlet {
                 if(orginalPassword.equals(password)) {
                     HttpSession session=request.getSession();
                     session.setAttribute("username",name);
-                    response.sendRedirect("index.jsp");
+                    message.add("success");
+                    message.add("Successfully logged in!");
+                    messages.add(message);
+                    request.setAttribute("messages",messages);
+                    request.getRequestDispatcher("index.jsp").forward(request,response);
+                    //response.sendRedirect("index.jsp");
                 }else {
-                    ArrayList<ArrayList<String>> errors = new ArrayList<ArrayList<String>>();
-                    ArrayList<String> error = new ArrayList<String>();
-                    error.add("danger");
-                    error.add("Invalid emailID or password");
-                    errors.add(error);
-                    request.setAttribute("errors",errors);
+                    
+                    message.add("danger");
+                    message.add("Invalid emailID or password");
+                    messages.add(message);
+                    request.setAttribute("messages",messages);
                     //request.setAttribute("message","Invalid emailID or password");
                     request.getRequestDispatcher("login.jsp").forward(request,response);
                 }
@@ -134,15 +139,27 @@ public class login extends HttpServlet {
                 if(n == 1) {
                     HttpSession session=request.getSession();
                     session.setAttribute("username",name);
-                    response.sendRedirect("index.jsp");
+                    
+                    message.add("success");
+                    message.add("Successfully signed in!");
+                    messages.add(message);
+                    request.setAttribute("messages",messages);
+                    request.getRequestDispatcher("index.jsp").forward(request,response);
+                    //response.sendRedirect("index.jsp");
                 } else {
                     response.sendRedirect("login.jsp");
                 }
             }
         } catch(Exception e) {
             System.err.println(e);
-            System.out.println(dbUrl);
-            response.sendRedirect("login.jsp");
+            //System.out.println(dbUrl);
+            
+            message.add("danger");
+            message.add("Email already in use!");
+            messages.add(message);
+            request.setAttribute("messages",messages);
+            request.getRequestDispatcher("login.jsp").forward(request,response);
+            //response.sendRedirect("login.jsp");
         }
     }
 

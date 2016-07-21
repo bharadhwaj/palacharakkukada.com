@@ -17,6 +17,7 @@
 <body>
     
     <jsp:include page="navbar.jsp" />
+    <jsp:include page="flash.jsp" />
   
   <!-- Carousel Starts here. -->     
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
