@@ -76,7 +76,7 @@ public class search extends HttpServlet {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
             String search = request.getParameter("search");
-            PreparedStatement ps = con.prepareStatement("select * from products where manufacturer = ?");
+            PreparedStatement ps = con.prepareStatement("select * from products where manufacturer like ?");
             ps.setString(1, search);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -86,7 +86,7 @@ public class search extends HttpServlet {
                 product.add(rs.getString("stock"));
                 product.add(rs.getString("image"));
                 products.add(product);
-                //out.println(product.get(0));
+                out.println(product.get(0));
             }
         } catch(Exception e) {
             
