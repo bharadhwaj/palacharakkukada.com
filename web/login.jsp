@@ -102,7 +102,7 @@
       </div> <!-- col-md-8 col-md-offset-2-->
     </div> <!-- row -->
   </div><!-- container -->
-
+  <jsp:include page="footer.jsp" />
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -6,8 +6,6 @@
     left:0px;
     z-index:9999; 
     border-radius:0px;
-    background-color: rgba(0,0,0,0.3);
-
 }
 </style>
 <script type="text/javascript">
