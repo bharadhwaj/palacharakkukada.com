@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -56,15 +57,16 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        request.getSession().invalidate();
+        HttpSession session = request.getSession();
+        session.removeAttribute("username");
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         ArrayList<String> message = new ArrayList<String>();
         message.add("success");
-        message.add("Successfully logged out!");
+        message.add("You have successfully logged out!");
         messages.add(message);
-        request.setAttribute("messages",messages);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
-        //response.sendRedirect("index.jsp");
+        session.setAttribute("messages",messages);
+        //request.getRequestDispatcher("index.jsp").forward(request,response);
+        response.sendRedirect("index.jsp");
     }
 
     /**
