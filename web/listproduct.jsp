@@ -3,10 +3,11 @@
 {
     border-width: 1px;
     border-color: #333;
+    opacity: .5;
 
 }
 .imgOpacity:hover {
-	opacity: .5;
+		opacity: 1;
     transition: all 1s;
     -webkit-transition: all 1s;
 
@@ -23,7 +24,7 @@
 	        <h3><a href="" style="text-decoration:none;">Product Name</a></h3>
 	        <h4 style="color:#656565;">Company Name/Alternate Name</h4>
 	        <p> One line description of the product if necessary </p>
-	        <h5 style="color:#656565;"><strong>Rs.</strong>9,999</h5>
+	        <h4 style="color:#656565;">Rs.9,999</h4>
 	        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Buy Later</a></p>
 	        </center>
 	      </div>
