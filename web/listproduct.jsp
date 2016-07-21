@@ -25,7 +25,7 @@
 	        <h4 style="color:#656565;">Company Name/Alternate Name</h4>
 	        <p> One line description of the product if necessary </p>
 	        <h4 style="color:#656565;">Rs.9,999</h4>
-	        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Buy Later</a></p>
+	        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart</a></p>
 	        </center>
 	      </div>
 	    </div>
