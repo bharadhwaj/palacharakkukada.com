@@ -112,19 +112,19 @@ public class login extends HttpServlet {
                     HttpSession session=request.getSession();
                     session.setAttribute("username",name);
                     message.add("success");
-                    message.add("Successfully logged in!");
+                    message.add("You have successfully logged in!");
                     messages.add(message);
-                    request.setAttribute("messages",messages);
-                    request.getRequestDispatcher("index.jsp").forward(request,response);
-                    //response.sendRedirect("index.jsp");
+                    session.setAttribute("messages",messages);
+                    //request.getRequestDispatcher("index.jsp").forward(request,response);
+                    response.sendRedirect("index.jsp");
                 }else {
-                    
+                    HttpSession session=request.getSession();
                     message.add("danger");
                     message.add("Invalid email or password");
                     messages.add(message);
-                    request.setAttribute("messages",messages);
-                    //request.setAttribute("message","Invalid emailID or password");
-                    request.getRequestDispatcher("login.jsp").forward(request,response);
+                    session.setAttribute("messages",messages);
+                    //request.getRequestDispatcher("login.jsp").forward(request,response);
+                    response.sendRedirect("login.jsp");
                 }
                 
             } else {
@@ -141,11 +141,11 @@ public class login extends HttpServlet {
                     session.setAttribute("username",name);
                     
                     message.add("success");
-                    message.add("Successfully signed in!");
+                    message.add("You have successfully signed in!");
                     messages.add(message);
-                    request.setAttribute("messages",messages);
-                    request.getRequestDispatcher("index.jsp").forward(request,response);
-                    //response.sendRedirect("index.jsp");
+                    session.setAttribute("messages",messages);
+                    //request.getRequestDispatcher("index.jsp").forward(request,response);
+                    response.sendRedirect("index.jsp");
                 } else {
                     response.sendRedirect("login.jsp");
                 }
@@ -153,13 +153,13 @@ public class login extends HttpServlet {
         } catch(Exception e) {
             System.err.println(e);
             //System.out.println(dbUrl);
-            
+            HttpSession session=request.getSession();
             message.add("danger");
             message.add("Email already in use!");
             messages.add(message);
-            request.setAttribute("messages",messages);
-            request.getRequestDispatcher("login.jsp").forward(request,response);
-            //response.sendRedirect("login.jsp");
+            session.setAttribute("messages",messages);
+            //request.getRequestDispatcher("login.jsp").forward(request,response);
+            response.sendRedirect("login.jsp");
         }
     }
 
