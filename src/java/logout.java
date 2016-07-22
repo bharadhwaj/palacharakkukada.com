@@ -59,6 +59,7 @@ public class logout extends HttpServlet {
         throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
+        session.removeAttribute("isAdmin");
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         ArrayList<String> message = new ArrayList<String>();
         message.add("success");

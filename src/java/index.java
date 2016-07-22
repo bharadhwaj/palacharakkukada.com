@@ -72,26 +72,27 @@ public class index extends HttpServlet {
         stringBuilder.append(path);
         stringBuilder.append("/palacharakkukada.db");
         String dbUrl = stringBuilder.toString();
-        ArrayList<HashMap<String,String>> products = new ArrayList<HashMap<String,String>>();
-        HashMap<String,String> product;
+        ArrayList<HashMap<String,String>> items = new ArrayList<HashMap<String,String>>();
+        HashMap<String,String> item;
         try {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps = con.prepareStatement("select * from products");
+            PreparedStatement ps = con.prepareStatement("select * from items");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                product = new HashMap<String,String>();
-                product.put("pid",rs.getInt("productID")+"");
-                product.put("name",rs.getString("name"));
-                product.put("company",rs.getString("manufacturer"));
-                product.put("price",rs.getString("price"));
-                product.put("stock",rs.getString("stock"));
-                product.put("image",rs.getString("image"));
-                products.add(product);
-                //out.println(product.get(0));
+                item = new HashMap<String,String>();
+                item.put("itemID",rs.getInt("itemID")+"");
+                item.put("item",rs.getString("item"));
+                item.put("type",rs.getString("type"));
+                item.put("brand",rs.getString("brand"));
+                item.put("price",rs.getString("price"));
+                item.put("stock",rs.getString("stock"));
+                item.put("image",rs.getString("image"));
+                items.add(item);
+                //out.println(item.get(0));
             }
             HttpSession session=request.getSession();
-            session.setAttribute("products",products);
+            session.setAttribute("items",items);
             response.sendRedirect("index.jsp");
         } catch(Exception e) {
             out.print(e);
