@@ -100,17 +100,20 @@ public class login extends HttpServlet {
             if(form.equals("login")) {
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
-                PreparedStatement ps = con.prepareStatement("select name,password from users where emailID = ?");
+                PreparedStatement ps = con.prepareStatement("select name,password,isAdmin from users where emailID = ?");
                 ps.setString(1,email);
                 ResultSet rs = ps.executeQuery();
                 String orginalPassword= "", name = "";
+                int isAdmin = 0;
                 if(rs.next()) {
                     orginalPassword = rs.getString("password");
                     name = rs.getString("name");
+                    isAdmin = rs.getInt("isAdmin");
                 }
                 if(orginalPassword.equals(password)) {
                     HttpSession session=request.getSession();
                     session.setAttribute("username",name);
+                    session.setAttribute("isAdmin",isAdmin);
                     message.add("success");
                     message.add("You have successfully logged in!");
                     messages.add(message);
@@ -139,7 +142,7 @@ public class login extends HttpServlet {
                 if(n == 1) {
                     HttpSession session=request.getSession();
                     session.setAttribute("username",name);
-                    
+                    session.setAttribute("isAdmin",0);
                     message.add("success");
                     message.add("You have successfully signed in!");
                     messages.add(message);

@@ -56,16 +56,16 @@
                 <div class="col-md-10">
                     <div class="container" style="padding-top:20px;">
                         <div class="row">
-                          <% for(HashMap<String,String> product: searchResults){ %>
+                          <% for(HashMap<String,String> item: searchResults){ %>
                           <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                              <img class="imgOpacity img-responsive" src="static/images/<%=product.get("image")%>" alt="...">
+                              <img class="imgOpacity img-responsive" src="static/images/<%=item.get("image")%>" alt="...">
                               <div class="caption">
                                 <center>
-                                <h3><a href="" style="text-decoration:none;"><%=product.get("name")%></a></h3>
-                                <h4 style="color:#656565;"><%=product.get("company")%></h4>
-                                <p> One line description of the product if necessary </p>
-                                <h4 style="color:#656565;">Rs.<%=product.get("price")%></h4>
+                                <h3><a href="" style="text-decoration:none;"><%=item.get("item")%></a></h3>
+                                <h4 style="color:#656565;"><%=item.get("brand")%></h4>
+                                <p> One line description of the item if necessary </p>
+                                <h4 style="color:#656565;">Rs.<%=item.get("price")%></h4>
                                 <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart</a></p>
                                 </center>
                               </div>

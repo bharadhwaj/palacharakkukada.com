@@ -77,14 +77,15 @@ public class search extends HttpServlet {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
             String search = request.getParameter("search");
-            PreparedStatement ps = con.prepareStatement("select * from products where manufacturer like ?");
+            PreparedStatement ps = con.prepareStatement("select * from items where type like ?");
             ps.setString(1, search);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 product = new HashMap<String,String>();
-                product.put("pid",rs.getInt("productID")+"");
-                product.put("name", rs.getString("name"));
-                product.put("company",rs.getString("manufacturer"));
+                product.put("itemID",rs.getInt("itemID")+"");
+                product.put("item", rs.getString("item"));
+                product.put("type",rs.getString("type"));
+                product.put("brand",rs.getString("brand"));
                 product.put("price",rs.getString("price"));
                 product.put("stock",rs.getString("stock"));
                 product.put("image",rs.getString("image"));
