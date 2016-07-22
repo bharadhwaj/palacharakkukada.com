@@ -61,29 +61,29 @@
             <span class="text-muted"> The product will be send to the below address. </span></center> 
           </div>
           <div class="panels-body">
-            <form class="form-horizontal">
+              <form class="form-horizontal" action="shipping" method="post">
               <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Name*</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="name" placeholder="name">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="name">
                 </div>
               </div>
               <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">Email*</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="email" placeholder="email address">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="email address">
                 </div>
               </div>
               <div class="form-group">
                 <label for="address" class="col-sm-2 control-label">Address*</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" name="address" rows="3"></textarea>
                 </div>
               </div>
               <div class="form-group">
                 <label for="pin" class="col-sm-2 control-label">Pincode*</label>
                 <div class="col-sm-10">
-                  <input type="text" maxlength="6" class="form-control" id="email" placeholder="pincode">
+                  <input type="text" maxlength="6" class="form-control" name="pin" id="email" placeholder="pincode">
                 </div>
               </div>
               <div class="form-group">
@@ -91,7 +91,7 @@
                 <div class="col-sm-10">
                   <div class="input-group">
                       <span class="input-group-addon">+91</span>
-                      <input type="text" maxlength="10" class="form-control" id="email" placeholder="+919645567834">
+                      <input type="text" maxlength="10" class="form-control" name="phone" id="email" placeholder="+919645567834">
                     </div>
                 </div>
               </div>
