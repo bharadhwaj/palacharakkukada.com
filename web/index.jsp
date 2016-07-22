@@ -17,6 +17,22 @@
     <link href="static/css/bootswatchce.css" rel="stylesheet">
     <link href="static/css/signin.css" rel="stylesheet">
   </head> 
+  <style type="text/css">
+    .imgOpacity
+    {
+        border-width: 1px;
+        border-color: #333;
+        opacity: .5;
+
+    }
+    .imgOpacity:hover {
+        opacity: 1;
+        transition: all 1s;
+        -webkit-transition: all 1s;
+
+    }
+
+  </style>
 
 <body>
     
@@ -78,14 +94,14 @@
           <% for(HashMap<String,String> item: items){ %>
 	  <div class="col-sm-6 col-md-4">
 	    <div class="thumbnail">
-	      <img class="imgOpacity img-responsive" src="static/images/<%=item.get("image")%>" alt="...">
+	      <img class="imgOpacity img-responsive" src='static/images/<%=product.get("image")%>'>
 	      <div class="caption">
 	        <center>
-	        <h3><a href="" style="text-decoration:none;"><%=item.get("item")%></a></h3>
-	        <h4 style="color:#656565;"><%=item.get("brand")%></h4>
-	        <p> One line description of the item if necessary </p>
-	        <h4 style="color:#656565;">Rs.<%=item.get("price")%></h4>
-	        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart</a></p>
+	        <h3><a href="" style="text-decoration:none;"><%=product.get("name")%></a></h3>
+	        <h4 style="color:#656565;"><%=product.get("company")%></h4>
+	        <p> One line description of the product if necessary </p>
+	        <h4 style="color:#656565;">Rs.<%=product.get("price")%></h4>
+	        <p><a href="#" class="btn btn-info" role="button"> Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart </a></p>
 	        </center>
 	      </div>
 	    </div>

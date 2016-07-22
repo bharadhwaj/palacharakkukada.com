@@ -22,18 +22,15 @@
   font-size: 14px;
 }
 </style>
-  <body>
-
-
-
-<div class="container" style="padding-top:30px;">
+<body>
+  <div class="container" style="padding-top:30px;">
         <%
           if(session.getAttribute("username") != null){
               response.sendRedirect("index.jsp");
           }
       %>
 
-      <jsp:include page="flash.jsp" />
+    <jsp:include page="flash.jsp" />
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <center>
@@ -104,29 +101,28 @@
   </div><!-- container -->
   <jsp:include page="footer.jsp" />
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="static/js/jquery.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script>
-      function checkPasswordMatch() {
-        var password = $("#password").val();
-        var confirmPassword = $("#confirm-password").val();
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="static/js/jquery.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+  <script>
+    function checkPasswordMatch() {
+      var password = $("#password").val();
+      var confirmPassword = $("#confirm-password").val();
 
-        if (password != confirmPassword) {
-          $("#divCheckPasswordMatchError").html("Passwords do not match!");
-          $("#divCheckPasswordMatchSuccess").html("");
-          $('#submitButton').addClass("disabled");
-        }
-        else {
-          $("#divCheckPasswordMatchError").html("");
-          $("#divCheckPasswordMatchSuccess").html("Passwords match.");
-          $('#submitButton').removeClass("disabled");
-        }
+      if (password != confirmPassword) {
+        $("#divCheckPasswordMatchError").html("Passwords do not match!");
+        $("#divCheckPasswordMatchSuccess").html("");
+        $('#submitButton').addClass("disabled");
       }
-      
-
-    </script>
-  </body>
+      else {
+        $("#divCheckPasswordMatchError").html("");
+        $("#divCheckPasswordMatchSuccess").html("Passwords match.");
+        $('#submitButton').removeClass("disabled");
+      }
+    }
+    
+  </script>
+</body>
 </html>
