@@ -42,8 +42,15 @@
           if(session.getAttribute("username") != null) {
               username = (String) session.getAttribute("username");
       %>
-        
-        <li class="nav nav-pills"><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Cart <span class="badge">3</span></a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Cart <span class="badge">2</span></a>
+          <ul class="dropdown-menu" role="menu" style="background:#C5C5C5;">
+            <li style="padding:10px;"><b>Product 1 </b> x <span class="badge">2</span></a></li>
+            <li style="padding:10px;"><b>Product 2 </b> x <span class="badge">1</span></a></li>
+            <li style="padding-top:10px;"><center><button class="btn btn-warning">View Cart</button></center></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
