@@ -92,20 +92,23 @@
     <div class="container" style="padding-top:20px;">
 	<div class="row">
           <% for(HashMap<String,String> item: items){ %>
-	  <div class="col-sm-6 col-md-4">
-	    <div class="thumbnail">
-	      <img class="imgOpacity img-responsive" src='static/images/<%=product.get("image")%>'>
-	      <div class="caption">
-	        <center>
-	        <h3><a href="" style="text-decoration:none;"><%=product.get("name")%></a></h3>
-	        <h4 style="color:#656565;"><%=product.get("company")%></h4>
-	        <p> One line description of the product if necessary </p>
-	        <h4 style="color:#656565;">Rs.<%=product.get("price")%></h4>
-	        <p><a href="#" class="btn btn-info" role="button"> Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart </a></p>
-	        </center>
-	      </div>
-	    </div>
-	  </div>
+          <form action="addToCart" method="post">
+              <input type="hidden" value="<%=item.get("itemID")%>" name="itemID">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img class="imgOpacity img-responsive" src='static/images/<%=item.get("image")%>'>
+                <div class="caption">
+                  <center>
+                  <h3><a href="" style="text-decoration:none;"><%=item.get("item")%></a></h3>
+                  <h4 style="color:#656565;"><%=item.get("brand")%></h4>
+                  <p> One line description of the product if necessary </p>
+                  <h4 style="color:#656565;">Rs.<%=item.get("price")%></h4>
+                  <p><a href="#" class="btn btn-info" role="button"> Buy Now</a> <input type="submit" class="btn btn-warning" value="Add to Cart"></p>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </form>
           <% }} %>
 	</div>
     </div>
