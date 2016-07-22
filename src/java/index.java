@@ -18,12 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anil
  */
-public class search extends HttpServlet {
+public class index extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +43,10 @@ public class search extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet search</title>");            
+            out.println("<title>Servlet index</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet search at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet index at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,31 +72,29 @@ public class search extends HttpServlet {
         stringBuilder.append(path);
         stringBuilder.append("/palacharakkukada.db");
         String dbUrl = stringBuilder.toString();
-        ArrayList<HashMap<String,String>> searchResults = new ArrayList<HashMap<String,String>>();
+        ArrayList<HashMap<String,String>> products = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> product;
         try {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
-            String search = request.getParameter("search");
-            PreparedStatement ps = con.prepareStatement("select * from products where manufacturer like ?");
-            ps.setString(1, search);
+            PreparedStatement ps = con.prepareStatement("select * from products");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 product = new HashMap<String,String>();
                 product.put("pid",rs.getInt("productID")+"");
-                product.put("name", rs.getString("name"));
+                product.put("name",rs.getString("name"));
                 product.put("company",rs.getString("manufacturer"));
                 product.put("price",rs.getString("price"));
                 product.put("stock",rs.getString("stock"));
                 product.put("image",rs.getString("image"));
-                searchResults.add(product);
-                out.println(product.get("name"));
+                products.add(product);
+                //out.println(product.get(0));
             }
-            request.setAttribute("searchResults",searchResults);
-            request.setAttribute("searchKey",search);
-            request.getRequestDispatcher("search.jsp").forward(request,response);
+            HttpSession session=request.getSession();
+            session.setAttribute("products",products);
+            response.sendRedirect("index.jsp");
         } catch(Exception e) {
-            System.err.println(e);
+            out.print(e);
         }
     }
 
@@ -110,7 +109,7 @@ public class search extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

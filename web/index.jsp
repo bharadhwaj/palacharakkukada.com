@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,9 +67,30 @@
     </a>
   </div>
   <!-- Carousel ends here. -->
-
-  <jsp:include page="listproduct.jsp" />
-
+  <%
+    if(session.getAttribute("products") != null) {
+        ArrayList<HashMap<String,String>> products = (ArrayList<HashMap<String,String>>)session.getAttribute("products");
+  %>
+    <div class="container" style="padding-top:20px;">
+	<div class="row">
+          <% for(HashMap<String,String> product: products){ %>
+	  <div class="col-sm-6 col-md-4">
+	    <div class="thumbnail">
+	      <img class="imgOpacity img-responsive" src="static/images/<%=product.get("image")%>" alt="...">
+	      <div class="caption">
+	        <center>
+	        <h3><a href="" style="text-decoration:none;"><%=product.get("name")%></a></h3>
+	        <h4 style="color:#656565;"><%=product.get("company")%></h4>
+	        <p> One line description of the product if necessary </p>
+	        <h4 style="color:#656565;">Rs.<%=product.get("price")%></h4>
+	        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Add to Cart</a></p>
+	        </center>
+	      </div>
+	    </div>
+	  </div>
+          <% }} %>
+	</div>
+    </div>
   <jsp:include page="footer.jsp" />
   
 </body>
