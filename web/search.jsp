@@ -16,6 +16,22 @@
     <link href="static/css/bootswatchce.css" rel="stylesheet">
     <link href="static/css/signin.css" rel="stylesheet">
   </head> 
+  <style type="text/css">
+    .imgOpacity
+    {
+        border-width: 1px;
+        border-color: #333;
+        opacity: .5;
+
+    }
+    .imgOpacity:hover {
+        opacity: 1;
+        transition: all 1s;
+        -webkit-transition: all 1s;
+
+    }
+
+  </style>
 
 <body>
     
