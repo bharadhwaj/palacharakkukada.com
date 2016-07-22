@@ -91,7 +91,8 @@ public class search extends HttpServlet {
                 searchResults.add(product);
                 out.println(product.get("name"));
             }
-            request.setAttribute("searchResults",searchResults);
+            if(searchResults.size() != 0)
+                request.setAttribute("searchResults",searchResults);
             request.setAttribute("searchKey",search);
             request.getRequestDispatcher("search.jsp").forward(request,response);
         } catch(Exception e) {

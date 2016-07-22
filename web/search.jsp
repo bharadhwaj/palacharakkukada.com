@@ -21,15 +21,17 @@
     
   <jsp:include page="navbar.jsp" />
     <div class="container">
-        <div class="form-group">
-	  <div class="input-group">
-	    <span class="input-group-addon"><strong>Search results for:</strong></span>
-	    <input class="form-control" type="text" value=${searchKey}>
-            <span class="input-group-btn">
-	      <button class="btn btn-info" type="button">Search!</button>
-	    </span>
-	  </div>
-	</div>
+        <form action="search" method="get">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><strong>Search results for:</strong></span>
+                <input class="form-control" type="text" name="search" value=${searchKey}>
+                <span class="input-group-btn">
+                  <button class="btn btn-info" type="button">Search!</button>
+                </span>
+              </div>
+            </div>
+        </form>
         <%
             if(request.getAttribute("searchResults") != null) {
                 ArrayList<HashMap<String,String>> searchResults = (ArrayList<HashMap<String,String>>)request.getAttribute("searchResults");
