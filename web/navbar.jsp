@@ -47,7 +47,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Edit Profile</a></li>
+            <li><a href="/palacharakkukada.com/edituserdetails.jsp">Edit Profile</a></li>
             <li><a href="logout">Logout</a></li>
           </ul>
         </li>
