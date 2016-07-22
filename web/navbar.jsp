@@ -43,7 +43,7 @@
               username = (String) session.getAttribute("username");
       %>
       <li class="dropdown">
-        <a href="viewCart" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
+        <a href="cart?step=0" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
           <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Cart <span class="badge">2</span></a>
           <ul class="dropdown-menu" role="menu" style="background:#C5C5C5;">
             <li style="padding:10px;"><b>Product 1 </b> x <span class="badge">2</span></a></li>

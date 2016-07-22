@@ -17,6 +17,7 @@
 </head>
 <body>
   <jsp:include page="navbar.jsp" />
+  <jsp:include page="flash.jsp" />
   <%
         if(request.getAttribute("cartItems") == null) {
   %>
@@ -43,12 +44,15 @@
                     <tbody>
                       <% for(HashMap<String,String> item: cartItems){ %>
                         <tr>
+                    <form action="deleteItem" method="post">
+                        <input type="hidden" value="<%=item.get("ID")%>" name="ID">
                           <td> 1 </td>
                           <td> <%=item.get("item")%> </td>
                           <td> <%=item.get("price")%> </td>
                           <td> <%=item.get("quantity")%> </td>
                           <td> <%=item.get("total")%> </td>
-                          <td><a href="#" class="btn btn-danger">Remove</a></td>
+                          <td><input type='submit' class="btn btn-danger" value='Remove'></td>
+                    </form>
                         </tr>
                        <% }%>
                       <tr class="success">
@@ -63,8 +67,8 @@
                   </table>
                   <p> 
                     <center>
-                      <button type="submit" class="btn btn-success">Proceed to check out</button>
-                      <button type="submit" class="btn btn-warning">Buy more</button>
+                        <a href="cart?step=1" class="btn btn-success">Proceed to check out</a>
+                      <a href="index.jsp" role="button" class="btn btn-warning">Buy more</a>
                     </center>
                   </p>
                 </div>

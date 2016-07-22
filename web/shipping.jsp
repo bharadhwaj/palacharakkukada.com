@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +17,9 @@
 </head>
 <body>
   <jsp:include page="navbar.jsp" />
+  <%
+            ArrayList<HashMap<String,String>> cartItems = (ArrayList<HashMap<String,String>>)request.getAttribute("cartItems");
+  %>
   <div class="container" style="padding-top:30px;">
     <div class="row">
       <div class="col-md-6">
@@ -27,26 +32,25 @@
               <th> Price</th>
               <th> Quantity</th>
               <th> Total</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td> 1 </td>
-              <td> Nokia 220 </td>
-              <td> 2699 </td>
-              <td> <input type="number" class="form-control" id="email" value="1" style="width: 60px;" min="1" max="10"> </td>
-              <td> 2699 </td>
-              <td><a href="#" class="btn btn-danger">Remove</a></td>
-            </tr>
-            <tr class="default">
-              <td> 2 </td>
-              <td> Samsung Guru </td>
-              <td> 1500 </td>
-              <td> <input type="number" class="form-control" id="email" value="1" style="width: 60px;" min="1" max="10"> </td>
-              <td> 1500 </td>
-              <td><a href="#" class="btn btn-danger">Remove</a></td>
-            </tr>
+            <% for(HashMap<String,String> item: cartItems){ %>
+                        <tr>
+                          <td> 1 </td>
+                          <td> <%=item.get("item")%> </td>
+                          <td> <%=item.get("price")%> </td>
+                          <td> <%=item.get("quantity")%> </td>
+                          <td> <%=item.get("total")%> </td>
+                        </tr>
+             <% }%>
+                     <tr class="success">
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> <strong> Total </strong> </td>
+                        <td>Rs. ${totalAmount}</td>
+                      </tr>
           </tbody>
         </table>
       </div>
