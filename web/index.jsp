@@ -68,7 +68,9 @@
   </div>
   <!-- Carousel ends here. -->
   <%
-    if(session.getAttribute("items") != null) {
+      if(session.getAttribute("items") == null) {
+          response.sendRedirect("home");
+      }else {
         ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>)session.getAttribute("items");
   %>
     <div class="container" style="padding-top:20px;">

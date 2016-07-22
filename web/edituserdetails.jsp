@@ -23,7 +23,11 @@
 }
 </style>
   <body>
-
+<%
+    if(session.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 <jsp:include page="navbar.jsp" />
 <jsp:include page="flash.jsp" />
 
@@ -51,7 +55,7 @@
             <div role="tabpanel" class="tab-pane fade in active" id="userdetails">
               <div class="panels panel-default">
                 <div class="panels-body">
-                  <form class="form-signin" role="login" action="login" method="post">
+                  <form class="form-signin" role="login" action="editUserDetails" method="post">
                       
                       <input type="hidden" name="form" value="edituserdetails">
                       
@@ -74,7 +78,7 @@
             <div role="tabpanel" class="tab-pane fade" id="changepassword">
               <div class="panels panel-default">
                 <div class="panels-body">
-                  <form class="form-signin" role="login" action="login" method="post">
+                  <form class="form-signin" role="login" action="editUserDetails" method="post">
                     
                     <input type="hidden" name="form" value="changepassword">
                     

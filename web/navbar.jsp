@@ -28,7 +28,7 @@
       </ul>
       <form action="search" method="get" class="navbar-form navbar-left" role="search">
        <div class="input-group">
-          <input type="text" class="form-control" name="search" placeholder="Search for...">
+          <input type="text" class="form-control" name="search" placeholder="Search for..." required>
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

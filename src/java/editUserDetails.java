@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author anil
  */
-public class login extends HttpServlet {
+public class editUserDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +32,8 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific message occurs
-     * @throws IOException if an I/O message occurs
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -43,10 +43,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");            
+            out.println("<title>Servlet editUserDetails</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet editUserDetails at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,13 +58,13 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific message occurs
-     * @throws IOException if an I/O message occurs
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -72,8 +72,8 @@ public class login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific message occurs
-     * @throws IOException if an I/O message occurs
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -92,84 +92,73 @@ public class login extends HttpServlet {
         String dbUrl = stringBuilder.toString();
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         ArrayList<String> message = new ArrayList<String>();
-                
+        HttpSession session = request.getSession();
         try {
             Class.forName("org.sqlite.JDBC");
-
             Connection con = DriverManager.getConnection(dbUrl);
             String form = request.getParameter("form");
-            if(form.equals("login")) {
-                String email = request.getParameter("email");
+            int userID = (int)session.getAttribute("userID");
+            if(form.equals("edituserdetails")) {
+                String newName = request.getParameter("name");
                 String password = request.getParameter("password");
-                PreparedStatement ps = con.prepareStatement("select * from users where emailID = ?");
-                ps.setString(1,email);
+                PreparedStatement ps = con.prepareStatement("select password from users where userID = ?");
+                ps.setInt(1,userID);
                 ResultSet rs = ps.executeQuery();
-                String orginalPassword= "", name = "";
-                int userID = 0,isAdmin = 0;
+                String orginalPassword= "";
+                
                 if(rs.next()) {
-                    orginalPassword = rs.getString("password");
-                    name = rs.getString("name");
-                    isAdmin = rs.getInt("isAdmin");
-                    userID = rs.getInt("userID");
+                    orginalPassword = rs.getString("password");         
                 }
                 if(orginalPassword.equals(password)) {
-                    HttpSession session=request.getSession();
-                    session.setAttribute("username",name);
-                    session.setAttribute("isAdmin",isAdmin);
+                    ps = con.prepareStatement("update users set name = ? where userId = ?");
+                    ps.setString(1,newName);
+                    ps.setInt(2, userID);
+                    ps.executeUpdate();
                     message.add("success");
-                    message.add("You have successfully logged in!");
+                    message.add("Username successfuly changed!");
                     messages.add(message);
+                    session.setAttribute("username",newName);
                     session.setAttribute("messages",messages);
-                    session.setAttribute("userID",userID);
-                    //request.getRequestDispatcher("index.jsp").forward(request,response);
-                    response.sendRedirect("index.jsp");
-                }else {
-                    HttpSession session=request.getSession();
-                    message.add("danger");
-                    message.add("Invalid email or password");
-                    messages.add(message);
-                    session.setAttribute("messages",messages);
-                    //request.getRequestDispatcher("login.jsp").forward(request,response);
-                    response.sendRedirect("login.jsp");
-                }
-                
-            } else {
-                String name = request.getParameter("name");
-                String email = request.getParameter("email");
-                String password = request.getParameter("password");
-                PreparedStatement ps = con.prepareStatement("insert into users(name,emailID,password) values(?,?,?)",Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1,name);
-                ps.setString(2,email);
-                ps.setString(3,password);
-                int userID,n = ps.executeUpdate();
-                ResultSet generatedKeys = ps.getGeneratedKeys();
-                if (generatedKeys.next() && n==1) {
-                    userID = generatedKeys.getInt(1);
-                    HttpSession session=request.getSession();
-                    session.setAttribute("username",name);
-                    session.setAttribute("isAdmin",0);
-                    session.setAttribute("userID",userID);
-                    message.add("success");
-                    message.add("You have successfully signed in!");
-                    messages.add(message);
-                    session.setAttribute("messages",messages);
-                    //request.getRequestDispatcher("index.jsp").forward(request,response);
                     response.sendRedirect("index.jsp");
                 } else {
-                    response.sendRedirect("login.jsp");
+                    message.add("danger");
+                    message.add("Password incorrect!");
+                    messages.add(message);
+                    session.setAttribute("messages",messages);
+                    response.sendRedirect("edituserdetails.jsp");
+                    //out.print(password +" " + orginalPassword);
+                }
+            } else {
+                String password = request.getParameter("password");
+                String oldPassword = request.getParameter("old-password");
+                PreparedStatement ps = con.prepareStatement("select password from users where userID = ?");
+                ps.setInt(1,userID);
+                ResultSet rs = ps.executeQuery();
+                String orginalPassword= "";
+                if(rs.next()) {
+                    orginalPassword = rs.getString("password");         
+                }
+                if(orginalPassword.equals(oldPassword)) {
+                    ps = con.prepareStatement("update users set password = ? where userId = ?");
+                    ps.setString(1,password);
+                    ps.setInt(2, userID);
+                    ps.executeUpdate();
+                    message.add("success");
+                    message.add("Password successfuly changed!");
+                    messages.add(message);
+                    session.setAttribute("messages",messages);
+                    response.sendRedirect("index.jsp");
+                } else {
+                    message.add("danger");
+                    message.add("Password incorrect!");
+                    messages.add(message);
+                    session.setAttribute("messages",messages);
+                    response.sendRedirect("edituserdetails.jsp");
+                    //out.print("inside else");
                 }
             }
         } catch(Exception e) {
-            System.err.println(e);
-            //System.out.println(dbUrl);
-            HttpSession session=request.getSession();
-            message.add("danger");
-            message.add("Email already in use!");
-            messages.add(message);
-            session.setAttribute("messages",messages);
-            //request.getRequestDispatcher("login.jsp").forward(request,response);
-            //response.sendRedirect("login.jsp");
-            out.print(e);
+            
         }
     }
 

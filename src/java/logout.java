@@ -60,6 +60,7 @@ public class logout extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
         session.removeAttribute("isAdmin");
+        session.removeAttribute("userID");
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         ArrayList<String> message = new ArrayList<String>();
         message.add("success");

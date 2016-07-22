@@ -15,7 +15,11 @@
   </head> 
 
 <body>
-    
+  <%
+    if(session.getAttribute("username") == null) {
+        response.sendRedirect("login.jsp");
+    }
+  %>
   <jsp:include page="navbar.jsp" />
   <div class="container">
   	<div class="row">

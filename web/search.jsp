@@ -25,7 +25,7 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><strong>Search results for:</strong></span>
-                <input class="form-control" type="text" name="search" value=${searchKey}>
+                <input class="form-control" type="text" name="search" required value=${searchKey}>
                 <span class="input-group-btn">
                   <button class="btn btn-info" type="button">Search!</button>
                 </span>
