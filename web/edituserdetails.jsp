@@ -82,9 +82,9 @@
                     
                     <input type="hidden" name="form" value="changepassword">
                     
-                    <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="New Password" onInput="checkPasswordMatch();" required>
 
-                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm New Password" onChange="checkPasswordMatch();" required>
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm New Password" onInput="checkPasswordMatch();" required>
 
                     <input type="password" class="form-control" name="old-password" placeholder="Old Password" required>
 
