@@ -69,7 +69,7 @@
                                   <h4 style="color:#656565;">Quantity: <input type="number" name="quantity" value="1" style="width: 60px;" min="1" max="10" ></h4>
                                   <p> One line description of the item if necessary </p>
                                   <h4 style="color:#656565;">Rs.<%=item.get("price")%></h4>
-                                  <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <input type="submit" class="btn btn-warning" value="Add to Cart"></p>
+                                  <p><input type="submit" class="btn btn-info" value="Buy Now" name="submit"> <input type="submit" class="btn btn-warning" value="Add to Cart"></p>
                                   </center>
                                 </div>
                               </div>

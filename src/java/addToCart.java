@@ -151,12 +151,16 @@ public class addToCart extends HttpServlet {
                 }   
                     
                     con.close();
-                    
-                    message.add("success");
-                    message.add(strMsg);
-                    messages.add(message);
-                    session.setAttribute("messages",messages);
-                    response.sendRedirect("index.jsp");
+                    String submit = request.getParameter("submit");
+                    if(submit.equals("Buy Now")) {
+                        response.sendRedirect("cart?step=1");
+                    } else {
+                        message.add("success");
+                        message.add(strMsg);
+                        messages.add(message);
+                        session.setAttribute("messages",messages);
+                        response.sendRedirect("index.jsp");
+                    }
             } catch(Exception e) {
                 out.print(e);
             }
