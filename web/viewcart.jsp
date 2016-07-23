@@ -42,11 +42,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% for(HashMap<String,String> item: cartItems){ %>
+                      <%  int serialNumber = 1; 
+                          for(HashMap<String,String> item: cartItems){
+                          %>
                         <tr>
                     <form action="deleteItem" method="post">
                         <input type="hidden" value="<%=item.get("ID")%>" name="ID">
-                          <td> 1 </td>
+                          <td> <%=serialNumber%> </td>
                           <td> <%=item.get("item")%> </td>
                           <td> <%=item.get("price")%> </td>
                           <td> <%=item.get("quantity")%> </td>
@@ -54,7 +56,7 @@
                           <td><input type='submit' class="btn btn-danger" value='Remove'></td>
                     </form>
                         </tr>
-                       <% }%>
+                       <% serialNumber ++;}%>
                       <tr class="success">
                         <td> </td>
                         <td> </td>

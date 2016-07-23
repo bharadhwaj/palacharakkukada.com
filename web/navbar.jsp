@@ -74,11 +74,12 @@
               username = (String) session.getAttribute("username");
               if((Integer)session.getAttribute("isAdmin") == 1) {
       %>
-      <li><a href="#">Admin</a></li>
+        <li><a href="#">Admin</a></li>
       <% } %>
-      <li>
-        <a href="cart?step=0" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Cart <span class="badge">2</span></a>
+        <li>
+          <a href="cart?step=0" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
+            Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+          </a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
