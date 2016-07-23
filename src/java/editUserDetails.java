@@ -109,6 +109,7 @@ public class editUserDetails extends HttpServlet {
                 if(rs.next()) {
                     orginalPassword = rs.getString("password");         
                 }
+                rs.close();
                 if(orginalPassword.equals(password)) {
                     ps = con.prepareStatement("update users set name = ? where userId = ?");
                     ps.setString(1,newName);
@@ -138,6 +139,7 @@ public class editUserDetails extends HttpServlet {
                 if(rs.next()) {
                     orginalPassword = rs.getString("password");         
                 }
+                rs.close();
                 if(orginalPassword.equals(oldPassword)) {
                     ps = con.prepareStatement("update users set password = ? where userId = ?");
                     ps.setString(1,password);
@@ -157,6 +159,7 @@ public class editUserDetails extends HttpServlet {
                     //out.print("inside else");
                 }
             }
+            con.close();
         } catch(Exception e) {
             
         }
