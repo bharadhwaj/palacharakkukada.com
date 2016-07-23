@@ -1,3 +1,13 @@
+<style type="text/css">
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+  }
+  @media (min-width: 979px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+      display: block;
+  }
+}
+</style>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -7,7 +17,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/palacharakkukada.com/index.jsp">palacharakkukada.com</a>
+      <a class="navbar-brand" href="/palacharakkukada.com/index.jsp">
+      <span class="glyphicon glyphicon-home" aria-hidden="true"> </span> palacharakkukada.com
+      </a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
@@ -74,15 +86,22 @@
               username = (String) session.getAttribute("username");
               if((Integer)session.getAttribute("isAdmin") == 1) {
       %>
-        <li><a href="#">Admin</a></li>
-      <% } %>
+        
         <li>
-          <a href="cart?step=0" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
-            Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+          <a href="#">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> Admin 
           </a>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
+      <% } %>
+        <li>
+          <a href="cart?step=0">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span> Cart 
+          </a>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"> </span>
+            Hi, <%=username %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="/palacharakkukada.com/edituserdetails.jsp">Edit Profile</a></li>
             <li><a href="logout">Logout</a></li>
