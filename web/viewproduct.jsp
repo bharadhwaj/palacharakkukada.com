@@ -33,12 +33,12 @@
     		<div class="col-md-10">
 				  <div class="col-md-4">
 				      <a href="#" class="thumbnail"  data-toggle="modal" data-target="#popUp">
-					      <img src="static/images/logo_full.png" alt="...">
+					      <img src="<%= product.get("image") %>" alt="...">
 					    </a>
 				  </div>
 				  <div class="col-sm-8">
 				        <h1 style="color:black;"><strong><%= product.get("item") %></strong></h1>
-				        <h4>Company Name/Alternate Name</h4>
+				        <h4><%= product.get("brand") %></h4>
 				        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 				        <div class="well well-sm">
 								 	<strong> Specs: </strong>
@@ -59,8 +59,12 @@
 								</div>
 								<hr style="height:1px;border:none;color:#333;background-color:#333;" />
 								<p>Original Price: <strike>Rs. 999</strike></p>
-				        <h2 style="color:#656565;"><strong>Rs.</strong>9,999</h2>
-				        <p><a href="#" class="btn btn-info" role="button">Buy Now</a> <a href="#" class="btn btn-warning" role="button">Buy Later</a></p>
+				        <h2 style="color:#656565;"><strong>Rs.</strong><%= product.get("price") %></h2>
+                                        <form action="addToCart" method="post">
+                                            <input type="hidden" value="<%=product.get("itemID")%>" name="itemID">
+                                            <input type="hidden" name="quantity" value=1>
+                                            <p><input type="submit" class="btn btn-info" value="Buy Now" name="submit"> <input type="submit" class="btn btn-warning" value="Add to Cart" name="submit"></p>
+                                        </form>
 				  </div>
 				</div>
 			</div>

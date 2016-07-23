@@ -80,12 +80,13 @@ public class viewProduct extends HttpServlet {
             
             String pdt = request.getParameter("pdt");
             int itemID = Integer.parseInt(pdt);
-            PreparedStatement ps = con.prepareStatement("select item, type, brand, price, image from items where itemID = ?");
+            PreparedStatement ps = con.prepareStatement("select itemID,item, type, brand, price, image from items where itemID = ?");
             ps.setInt(1, itemID);
             ResultSet rs = ps.executeQuery();
             int totalAmount = 0;
             while(rs.next()) {
                 product = new HashMap<String,String>();
+                product.put("itemID", rs.getString("itemID"));
                 product.put("item", rs.getString("item"));
                 product.put("type", rs.getString("type"));
                 product.put("brand", rs.getString("brand"));

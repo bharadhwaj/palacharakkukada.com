@@ -98,9 +98,12 @@ public class addToCart extends HttpServlet {
             try {
                 Class.forName("org.sqlite.JDBC");
                 Connection con = DriverManager.getConnection(dbUrl);
+                
                 int itemID = Integer.parseInt(request.getParameter("itemID"));
+                out.println( " f");
                 int userID = (int) session.getAttribute("userID");
                 int quan =  Integer.parseInt(request.getParameter("quantity"));
+                
                 PreparedStatement ps = con.prepareStatement("select ID,item, quantity,total from cart where userID = ? and itemID = ?");
                 ps.setInt(1,userID);
                 ps.setInt(2, itemID);
