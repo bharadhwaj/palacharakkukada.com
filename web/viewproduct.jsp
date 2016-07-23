@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@page import="java.util.HashMap"%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -18,12 +18,16 @@
     
     <jsp:include page="navbar.jsp" />
     <div class="container">
-    	
+<%
+    if(request.getAttribute("product") != null) {
+    	 HashMap<String,String> product = (HashMap<String,String>)request.getAttribute("product");
+%>
     	<ul class="breadcrumb">
 			  <li><a href="#">Home</a></li>
-			  <li><a href="#">Section1</a></li>
-			  <li class="active">Product</li>
-			</ul>
+			  <li><a href="#"><%= product.get("type") %></a></li>
+			  <li class="active"><%= product.get("item") %></li>
+		</ul>
+
 
     	<div class="row">
     		<div class="col-md-10">
@@ -33,7 +37,7 @@
 					    </a>
 				  </div>
 				  <div class="col-sm-8">
-				        <h1 style="color:black;"><strong>Product Name</strong></h1>
+				        <h1 style="color:black;"><strong><%= product.get("item") %></strong></h1>
 				        <h4>Company Name/Alternate Name</h4>
 				        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 				        <div class="well well-sm">
@@ -60,6 +64,7 @@
 				  </div>
 				</div>
 			</div>
+			<% } %>
 
 			<!-- Pop ups -->
 			<div class="modal fade" id="popUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

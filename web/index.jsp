@@ -99,7 +99,7 @@
                 <img class="imgOpacity img-responsive" src='static/images/<%=item.get("image")%>'>
                 <div class="caption">
                   <center>
-                  <h3><a style="text-decoration:none;"><%=item.get("item")%></a></h3>
+                  <h3><a href="viewproduct.jsp?pdt=<%=item.get("itemID")%>" style="text-decoration:none;"><%=item.get("item")%></a></h3>
                   <h4 style="color:#656565;"><%=item.get("brand")%></h4>
                   <h4 style="color:#656565;">Quantity: <input type="number" name="quantity" value="1" style="width: 60px;" min="1" max="10" ></h4>
                   <p> One line description of the product if necessary </p>
