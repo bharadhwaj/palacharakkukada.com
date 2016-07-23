@@ -74,26 +74,38 @@ public class index extends HttpServlet {
         String dbUrl = stringBuilder.toString();
         ArrayList<HashMap<String,String>> items = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> item;
+        HashMap<String,ArrayList<String>> categories = new HashMap<String,ArrayList<String>>();
+        ArrayList<String> categoryItems;
         try {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
             PreparedStatement ps = con.prepareStatement("select * from items");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
+                String type = rs.getString("type");
+                String name = rs.getString("item");
                 item = new HashMap<String,String>();
                 item.put("itemID",rs.getInt("itemID")+"");
-                item.put("item",rs.getString("item"));
-                item.put("type",rs.getString("type"));
+                item.put("item",name);
+                item.put("type",type);
                 item.put("brand",rs.getString("brand"));
                 item.put("price",rs.getString("price"));
                 item.put("stock",rs.getString("stock"));
                 item.put("image",rs.getString("image"));
                 items.add(item);
                 //out.println(item.get(0));
+                if(categories.get(type) == null) {
+                    categoryItems = new ArrayList<String>();
+                    categoryItems.add(name);
+                    categories.put(type, categoryItems);
+                } else if (!categories.get(type).contains(name)){
+                    categories.get(type).add(name);
+                }
             }
             rs.close();
             HttpSession session=request.getSession();
             session.setAttribute("items",items);
+            session.setAttribute("categories", categories);
             response.sendRedirect("index.jsp");
         } catch(Exception e) {
             out.print(e);
