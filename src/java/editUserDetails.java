@@ -119,7 +119,7 @@ public class editUserDetails extends HttpServlet {
                     messages.add(message);
                     session.setAttribute("username",newName);
                     session.setAttribute("messages",messages);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("edituserdetails.jsp");
                 } else {
                     message.add("danger");
                     message.add("Password incorrect!");
@@ -147,7 +147,7 @@ public class editUserDetails extends HttpServlet {
                     message.add("Password successfuly changed!");
                     messages.add(message);
                     session.setAttribute("messages",messages);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("edituserdetails.jsp");
                 } else {
                     message.add("danger");
                     message.add("Password incorrect!");
