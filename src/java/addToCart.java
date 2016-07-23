@@ -100,28 +100,32 @@ public class addToCart extends HttpServlet {
                 Connection con = DriverManager.getConnection(dbUrl);
                 int itemID = Integer.parseInt(request.getParameter("itemID"));
                 int userID = (int) session.getAttribute("userID");
-                PreparedStatement ps = con.prepareStatement("select ID,quantity,total from cart where userID = ? and itemID = ?");
+                int quan =  Integer.parseInt(request.getParameter("quantity"));
+                PreparedStatement ps = con.prepareStatement("select ID,item, quantity,total from cart where userID = ? and itemID = ?");
                 ps.setInt(1,userID);
                 ps.setInt(2, itemID);
                 ResultSet rs = ps.executeQuery();
                 int checkIfRs = 0;
+                String strMsg = "";
                 if(rs.next()) {
                     checkIfRs = 1;
                     int ID = rs.getInt("ID");
                     int quantity = rs.getInt("quantity");
                     int total = rs.getInt("total");
+                    String item = rs.getString("item");
                     rs.close();
-                    int newTotal = total + (total/quantity);
-                    quantity++;
+                    int newTotal = total + quan*(total/quantity);
+                    quantity += quan;
                     ps = con.prepareStatement("update cart set quantity = ?,total = ? where ID = ?");
                     ps.setInt(1, quantity);
                     ps.setInt(2, newTotal);
-                    ps.setInt(3,ID);
+                    ps.setInt(3, ID);
                     ps.executeUpdate();
+                    strMsg = item + " added to the cart!"
                     
                 }
                     
-                String strMsg = "";
+                
                 
                 if(checkIfRs == 0) {
                     rs.close();
@@ -132,16 +136,19 @@ public class addToCart extends HttpServlet {
                     String price = rS.getString("price");
                     String item = rS.getString("item");
                     String actualPrice = price.split("/")[0];
-                    ps = con.prepareStatement("insert into cart(userID,itemID,item,price,quantity,total) values(?,?,?,?,1,?)");
+                    int totalPrice =quan * Integer.parseInt(actualPrice);
+
+                    ps = con.prepareStatement("insert into cart(userID,itemID,item,price,quantity,total) values(?,?,?,?,?,?)");
                     ps.setInt(1, userID);
                     ps.setInt(2, itemID);
                     ps.setString(3,item);
                     ps.setString(4,actualPrice);
-                    ps.setString(5,actualPrice);
+                    ps.setInt(5,quan);
+                    ps.setInt(6,totalPrice);
                     ps.executeUpdate();
                     rS.close();
                     strMsg = item + " added to the cart!"
-                }
+                }   
                     
                     con.close();
                     

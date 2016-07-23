@@ -1,13 +1,3 @@
-<style type="text/css">
-  ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;    
-  }
-  @media (min-width: 979px) {
-    ul.nav li.dropdown:hover > ul.dropdown-menu {
-      display: block;
-  }
-}
-</style>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -25,7 +15,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grains <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu open" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
@@ -34,7 +24,7 @@
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Beverages <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu open" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
