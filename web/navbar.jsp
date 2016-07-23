@@ -1,6 +1,16 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
+<style type="text/css">
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+  }
+  @media (min-width: 979px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+      display: block;
+    }
+  }
+</style>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
