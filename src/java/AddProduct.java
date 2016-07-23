@@ -11,8 +11,6 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author anil
  */
-public class shipping extends HttpServlet {
+public class AddProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +41,10 @@ public class shipping extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet shipping</title>");            
+            out.println("<title>Servlet AddProduct</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet shipping at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,67 +77,52 @@ public class shipping extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+
         Path currentRelativePath = Paths.get("");
         String path = currentRelativePath.toAbsolutePath().toString();
+
         StringBuilder stringBuilder = new StringBuilder();
+
         stringBuilder.append("jdbc:sqlite:");
         stringBuilder.append(path);
         stringBuilder.append("/palacharakkukada.db");
+
         String dbUrl = stringBuilder.toString();
-        HttpSession session = request.getSession();
+        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
+        ArrayList<String> message = new ArrayList<String>();
+                
         try {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String pin = request.getParameter("pin");
-            String phone = request.getParameter("phone");
-            PreparedStatement ps = con.prepareStatement("insert into shipping_details(userID,name,emailID,address,pin,phone) values(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-            int userId = (int) session.getAttribute("userID");
-            ps.setInt(1,userId);
-            ps.setString(2,name);
-            ps.setString(3,email);
-            ps.setString(4,address);
-            ps.setString(5,pin);
-            ps.setString(6,phone);
-            int shippingID = 0,n = ps.executeUpdate();
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next() && n==1) {
-                    shippingID = generatedKeys.getInt(1);                    
-            }
-            generatedKeys.close();
-            ps = con.prepareStatement("select itemID,item,quantity from cart where userID = ?");
-            ps.setInt(1,userId);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<String> shippedItems = new ArrayList<String>();
-            ArrayList<ArrayList<String>> itemDetails = new ArrayList<ArrayList<String>>();
-            ArrayList<String> item;
-            while(rs.next()) {
-                item = new ArrayList<String>();
-                item.add(rs.getInt("itemID")+"");
-                item.add(rs.getInt("quantity")+"");
-                itemDetails.add(item);
-                shippedItems.add(rs.getString("item"));
-            }
-            rs.close();
-            ps = con.prepareStatement("delete from cart where userID = ?");
-            ps.setInt(1,userId);
+            String item = request.getParameter("item");
+            String type = request.getParameter("type");
+            String brand = request.getParameter("brand");
+            String price = request.getParameter("price");
+            String image = request.getParameter("image");
+            int stock = Integer.parseInt(request.getParameter("stock"));
+            out.println(item);
+            out.println(type);
+            out.println(brand);
+            out.println(price);
+            out.println(stock);
+            out.println(image);
+            PreparedStatement ps = con.prepareStatement("insert into items(item,type,brand,price,stock,image) values(?,?,?,?,?,?)");
+            ps.setString(1, item);
+            ps.setString(2, type);
+            ps.setString(3,brand);
+            ps.setString(4, price);
+            ps.setInt(5, stock);
+            ps.setString(6,"static/images/"+image);
             ps.executeUpdate();
-            String dbQuery = "update items set stock = case itemID";
-            String itemIDs = "";
-            for(ArrayList<String> itemDetail: itemDetails) {
-                itemIDs += "," +itemDetail.get(0);
-                dbQuery += " when " + itemDetail.get(0) + " then stock - " + itemDetail.get(1);
-            }
-            dbQuery += " end where itemID in(" + itemIDs.substring(1) + ")";
-            ps = con.prepareStatement(dbQuery);
-            ps.executeUpdate();
-            request.setAttribute("shippingID", "PK" + userId + shippingID);
-            request.setAttribute("shippedItems",shippedItems);
-            request.getRequestDispatcher("orderconfirm.jsp").forward(request,response);
-        } catch (Exception e) {
+            HttpSession session = request.getSession();
+            message.add("success");
+            message.add("New item added!");
+            messages.add(message);
+            session.setAttribute("messages",messages);
+            response.sendRedirect("admin");
+        } catch(Exception e) {
             out.print(e);
+            
         }
     }
 

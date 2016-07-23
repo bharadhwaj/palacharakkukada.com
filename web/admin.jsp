@@ -184,36 +184,47 @@
               <div class="panels panel-default">
                 <div class="panels-body">
 
-                  <form class="form-signin" role="login" action="login" method="post">
+                  <form class="form-signin" role="login" action="AddProduct" method="post">
                     <input type="hidden" name="form" value="login">
                    
                     <div class="form-group">
                       <label for="sel1">Product Name:</label>
-                      <input type="name" class="form-control" name="productname" placeholder="Product Name" required autofocus>
+                      <input type="name" class="form-control" name="item" placeholder="Product Name" required autofocus>
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="sel1">Category:</label>
-                      <select class="form-control" id="sel1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                      <select class="form-control" id="sel1" name="type">
+                        <option> Select category </option>
+                        <option value="Grains">Grains</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Stationary">Stationary</option>
+                        <option value="Others">Others</option>
                       </select>
                     </div>
                     <br>
                     <div class="form-group">
+                      <label>Brand Name:</label>
+                      <input type="name" class="form-control" name="brand" placeholder="Brand Name" required autofocus>
+                    </div>
+                    <br>
+                    <div class="form-group">
                       <label for="sel1">Price</label>
-                      <input type="number" class="form-control" id="price" min="1" >
+                      <input type="text" name="price" class="form-control" id="price" placeholder="35/kg">
                     </div>
                     <br>
                     <div class="form-group">
                       <label for="sel1">Stock</label>
-                      <input type="number" class="form-control" id="stock" min="1" >
-                    </div>
-                  
+                      <input type="number" class="form-control" name="stock" min="1" >
+                    </div>  
                     <br>
-                    <button class="btn btn-lg btn-success btn-block">Add Product</button>
+                    <div class="form-group">
+                      <label>Image</label>
+                      <input type="file" class="form-control" name="image">
+                    </div>  
+                    <br>
+                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Add Product">
                     <button class="btn btn-lg btn-warning btn-block">Cancel</button>
                   </form>
                 
