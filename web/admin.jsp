@@ -17,7 +17,7 @@
   </head>
 <body>
     <%
-    if(session.getAttribute("username") == null || (int)session.getAttribute("isAdmin") == 0) {
+    if(session.getAttribute("username") == null || Integer.parseInt(session.getAttribute("isAdmin")+"") == 0) {
         response.sendRedirect("login.jsp");
     }
     %>
