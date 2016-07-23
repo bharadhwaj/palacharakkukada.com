@@ -11,20 +11,51 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grains <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Beverages <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grocery <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stationery <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Others <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+          </ul>
+        </li>
+
       </ul>
       <form action="search" method="get" class="navbar-form navbar-left" role="search">
        <div class="input-group">
@@ -41,15 +72,13 @@
           String username = "Login";
           if(session.getAttribute("username") != null) {
               username = (String) session.getAttribute("username");
+              if((Integer)session.getAttribute("isAdmin") == 1) {
       %>
-      <li class="dropdown">
+      <li><a href="#">Admin</a></li>
+      <% } %>
+      <li>
         <a href="cart?step=0" class="dropdown-toggle1" data-toggle="dropdown1" role="button" aria-expanded="false">
           <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Cart <span class="badge">2</span></a>
-          <ul class="dropdown-menu" role="menu" style="background:#C5C5C5;">
-            <li style="padding:10px;"><b>Product 1 </b> x <span class="badge">2</span></a></li>
-            <li style="padding:10px;"><b>Product 2 </b> x <span class="badge">1</span></a></li>
-            <li style="padding-top:10px;"><center><button class="btn btn-warning">View Cart</button></center></li>
-          </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, <%=username %> <span class="caret"></span></a>
