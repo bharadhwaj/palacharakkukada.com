@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +16,11 @@
     <link href="static/css/signin.css" rel="stylesheet">
   </head>
 <body>
+    <%
+    if(session.getAttribute("username") == null || (int)session.getAttribute("isAdmin") == 0) {
+        response.sendRedirect("login.jsp");
+    }
+    %>
   <jsp:include page="navbar.jsp" />
   <div class="container">
     <div class="row">
@@ -57,32 +64,30 @@
                           <th>Admin</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr class="default">
-                          <td>1</td>
-                          <td>Bharadhwaj</td>
-                          <td>bharadhwaj@content.com</td>
-                          <td><button class="btn btn-danger">Remove Admin</button></td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Column content</td>
-                          <td>Column content</td>
-                          <td><button class="btn btn-success">Make Admin</button></td>
-                        </tr>
-                        <tr class="default">
-                          <td>3</td>
-                          <td>Column content</td>
-                          <td>Column content</td>
-                          <td><button class="btn btn-success">Make Admin</button></td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Column content</td>
-                          <td>Column content</td>
-                          <td><button class="btn btn-success">Make Admin</button></td>
-                        </tr>
-                      </tbody>
+                      <%
+                            if(request.getAttribute("users") != null) {
+                                ArrayList<HashMap<String,String>> users = (ArrayList<HashMap<String,String>>)request.getAttribute("users");
+                        %>
+                        <tbody>
+                            <% for(HashMap<String,String> user: users){ %>
+                                <tr class="default">
+                                    <form action="makeAdmin" method="post">
+                                        <input type="hidden" value="<%=user.get("userID")%>" name="userID">
+                                        <td>1</td>
+                                        <td><%=user.get("name")%></td>
+                                        <td><%=user.get("emailID")%></td>
+                                        <% if(user.get("userID").equals(""+session.getAttribute("userID"))) {%>
+                                            <td></td>
+                                        <% } else if(user.get("isAdmin").equals("0")) { %>
+                                            <td><button class="btn btn-success" name="admin" value="makeAdmin">Make Admin</button></td>
+                                        <% } else {%>    
+                                            <td><button class="btn btn-danger" name="admin" value="removeAdmin">Remove Admin</button></td>
+                                        <% } %>
+                                    </form>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                        <% } %>
                     </table>
                   
                 </div>

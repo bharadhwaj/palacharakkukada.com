@@ -95,7 +95,6 @@ public class login extends HttpServlet {
                 
         try {
             Class.forName("org.sqlite.JDBC");
-
             Connection con = DriverManager.getConnection(dbUrl);
             String form = request.getParameter("form");
             if(form.equals("login")) {
@@ -121,6 +120,7 @@ public class login extends HttpServlet {
                     messages.add(message);
                     session.setAttribute("messages",messages);
                     session.setAttribute("userID",userID);
+                    session.setAttribute("emailID",email);
                     //request.getRequestDispatcher("index.jsp").forward(request,response);
                     response.sendRedirect("index.jsp");
                 }else {
@@ -149,6 +149,7 @@ public class login extends HttpServlet {
                     session.setAttribute("username",name);
                     session.setAttribute("isAdmin",0);
                     session.setAttribute("userID",userID);
+                    session.setAttribute("emailID",email);
                     message.add("success");
                     message.add("You have successfully signed in!");
                     messages.add(message);

@@ -78,7 +78,7 @@
       %>
         
         <li>
-          <a href="#">
+          <a href="admin">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> Admin 
           </a>
         </li>

@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -102,13 +103,26 @@ public class shipping extends HttpServlet {
             ps.setString(4,address);
             ps.setString(5,pin);
             ps.setString(6,phone);
-            int shippingID,n = ps.executeUpdate();
+            int shippingID = 0,n = ps.executeUpdate();
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next() && n==1) {
-                    shippingID = generatedKeys.getInt(1);
-                    request.setAttribute("shippingID", "PK" + userId + shippingID);
-                    request.getRequestDispatcher("orderconfirm.jsp").forward(request,response);                    
+                    shippingID = generatedKeys.getInt(1);                    
             }
+            generatedKeys.close();
+            ps = con.prepareStatement("select item from cart where userID = ?");
+            ps.setInt(1,userId);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<String> shippedItems = new ArrayList<String>();
+            while(rs.next()) {
+                shippedItems.add(rs.getString("item"));
+            }
+            rs.close();
+            ps = con.prepareStatement("delete from cart where userID = ?");
+            ps.setInt(1,userId);
+            ps.executeUpdate();
+            request.setAttribute("shippingID", "PK" + userId + shippingID);
+            request.setAttribute("shippedItems",shippedItems);
+            request.getRequestDispatcher("orderconfirm.jsp").forward(request,response);
         } catch (Exception e) {
             out.print(e);
         }

@@ -121,7 +121,7 @@ public class addToCart extends HttpServlet {
                     ps.setInt(2, newTotal);
                     ps.setInt(3, ID);
                     ps.executeUpdate();
-                    strMsg = item + " added to the cart!"
+                    strMsg = item + " added to the cart!";
                     
                 }
                     
@@ -147,7 +147,7 @@ public class addToCart extends HttpServlet {
                     ps.setInt(6,totalPrice);
                     ps.executeUpdate();
                     rS.close();
-                    strMsg = item + " added to the cart!"
+                    strMsg = item + " added to the cart!";
                 }   
                     
                     con.close();

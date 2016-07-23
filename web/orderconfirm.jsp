@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,14 +39,19 @@
 		  		<h3 style="color:#757575">List of items you bought: </h3>
   				<div class="row">
 	  				<div class="list-group col-md-6 col-md-offset-3">
-						  <a class="list-group-item">Nokia 2210 x 1</a>
-						  <a class="list-group-item">Moto G x 1</a>
+                                            <%
+                                                ArrayList<String> shippedItems = (ArrayList<String>)request.getAttribute("shippedItems");
+                                                for(String item: shippedItems) {
+                                            %>
+						  <a class="list-group-item"> <%=item%></a>
+                                            <% } %>
 						</div>			
 					</div>
-					<h4 style="color:#757575">Order will be delivered within 6-7 business days!</h3>
+					<h4 style="color:#757575">Order will be delivered within 6-7 business days!</h4>
+                                        <div><a class="btn btn-success btn-lg" href="index.jsp" role="button">Continue Shopping</a></div>
 					</center>
 					
-    			<div><a class="btn btn-success btn-lg" href="#" role="button">Continue Shopping</a></div>
+    			
 				</div>
 			</div>
 		</div>

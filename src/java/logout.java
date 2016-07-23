@@ -61,6 +61,7 @@ public class logout extends HttpServlet {
         session.removeAttribute("username");
         session.removeAttribute("isAdmin");
         session.removeAttribute("userID");
+        session.removeAttribute("emailID");
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         ArrayList<String> message = new ArrayList<String>();
         message.add("success");

@@ -11,18 +11,16 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anil
  */
-public class deleteItem extends HttpServlet {
+public class ChangeAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +39,10 @@ public class deleteItem extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteItem</title>");            
+            out.println("<title>Servlet makeAdmin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteItem at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet makeAdmin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,21 +82,21 @@ public class deleteItem extends HttpServlet {
         stringBuilder.append(path);
         stringBuilder.append("/palacharakkukada.db");
         String dbUrl = stringBuilder.toString();
-        HttpSession session = request.getSession();
-        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
-        ArrayList<String> message = new ArrayList<String>();
         try {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection(dbUrl);
-            String ID = request.getParameter("ID");
-            PreparedStatement ps = con.prepareStatement("delete from cart where ID = ?");
-            ps.setString(1,ID);
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            String admin = request.getParameter("admin");
+            int isAdmin;
+            if(admin.equals("makeAdmin"))
+                isAdmin = 1;
+            else
+                isAdmin = 0;
+            PreparedStatement ps = con.prepareStatement("update users set isAdmin = ? where userID = ?");
+            ps.setInt(1, isAdmin);
+            ps.setInt(2, userID);
             ps.executeUpdate();
-            message.add("success");
-            message.add("Item removed from cart!");
-            messages.add(message);
-            session.setAttribute("messages",messages);
-            response.sendRedirect("cart?step=0");
+            response.sendRedirect("admin");
         } catch (Exception e) {
         }
     }

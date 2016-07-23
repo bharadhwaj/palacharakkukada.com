@@ -59,10 +59,10 @@
                       
                       <input type="hidden" name="form" value="edituserdetails">
                       
-                      <input type="text" class="form-control" name="name" placeholder="Name" required autofocus value="get it from database">
+                      <input type="text" class="form-control" name="name" placeholder="Name" required autofocus value="<%=session.getAttribute("username")%>">
                       <br>
 
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Email address" disabled autofocus>
+                      <input type="email" class="form-control" name="email" id="email" value="<%=session.getAttribute("emailID")%>" placeholder="Email address" disabled autofocus>
                       <br>
 
                       <input type="password" class="form-control" name="password" placeholder="Enter Password to confirm" required>

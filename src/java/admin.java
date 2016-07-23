@@ -11,18 +11,19 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anil
  */
-public class deleteItem extends HttpServlet {
+public class admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +42,10 @@ public class deleteItem extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteItem</title>");            
+            out.println("<title>Servlet admin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteItem at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet admin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +63,35 @@ public class deleteItem extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        Path currentRelativePath = Paths.get("");
+        String path = currentRelativePath.toAbsolutePath().toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("jdbc:sqlite:");
+        stringBuilder.append(path);
+        stringBuilder.append("/palacharakkukada.db");
+        String dbUrl = stringBuilder.toString();
+        ArrayList<HashMap<String,String>> users = new ArrayList<HashMap<String,String>>();
+        HashMap<String,String> user;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection con = DriverManager.getConnection(dbUrl);
+            String search = request.getParameter("search");
+            PreparedStatement ps = con.prepareStatement("select * from users");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                user = new HashMap<String,String>();
+                user.put("userID",rs.getInt("userID")+"");
+                user.put("name", rs.getString("name"));
+                user.put("emailID", rs.getString("emailID"));
+                user.put("isAdmin", rs.getInt("isAdmin")+"");
+                users.add(user);
+            }
+            request.setAttribute("users",users);
+            request.getRequestDispatcher("admin.jsp").forward(request,response);
+        } catch (Exception e) {
+            out.print(e);
+        }
     }
 
     /**
@@ -76,31 +105,7 @@ public class deleteItem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        Path currentRelativePath = Paths.get("");
-        String path = currentRelativePath.toAbsolutePath().toString();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("jdbc:sqlite:");
-        stringBuilder.append(path);
-        stringBuilder.append("/palacharakkukada.db");
-        String dbUrl = stringBuilder.toString();
-        HttpSession session = request.getSession();
-        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
-        ArrayList<String> message = new ArrayList<String>();
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection(dbUrl);
-            String ID = request.getParameter("ID");
-            PreparedStatement ps = con.prepareStatement("delete from cart where ID = ?");
-            ps.setString(1,ID);
-            ps.executeUpdate();
-            message.add("success");
-            message.add("Item removed from cart!");
-            messages.add(message);
-            session.setAttribute("messages",messages);
-            response.sendRedirect("cart?step=0");
-        } catch (Exception e) {
-        }
+        processRequest(request, response);
     }
 
     /**
