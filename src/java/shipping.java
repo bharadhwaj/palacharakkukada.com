@@ -109,7 +109,7 @@ public class shipping extends HttpServlet {
                     shippingID = generatedKeys.getInt(1);                    
             }
             generatedKeys.close();
-            ps = con.prepareStatement("select item from cart where userID = ?");
+            ps = con.prepareStatement("select itemID,item,quantity from cart where userID = ?");
             ps.setInt(1,userId);
             ResultSet rs = ps.executeQuery();
             ArrayList<String> shippedItems = new ArrayList<String>();

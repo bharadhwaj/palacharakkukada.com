@@ -11,19 +11,18 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anil
  */
-public class admin extends HttpServlet {
+public class AlterProducts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class admin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet admin</title>");            
+            out.println("<title>Servlet AlterProducts</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet admin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AlterProducts at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,52 +62,7 @@ public class admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        Path currentRelativePath = Paths.get("");
-        String path = currentRelativePath.toAbsolutePath().toString();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("jdbc:sqlite:");
-        stringBuilder.append(path);
-        stringBuilder.append("/palacharakkukada.db");
-        String dbUrl = stringBuilder.toString();
-        ArrayList<HashMap<String,String>> users = new ArrayList<HashMap<String,String>>();
-        HashMap<String,String> user;
-        ArrayList<HashMap<String,String>> items = new ArrayList<HashMap<String,String>>();
-        HashMap<String,String> item;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection con = DriverManager.getConnection(dbUrl);
-            PreparedStatement ps = con.prepareStatement("select * from users");
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                user = new HashMap<String,String>();
-                user.put("userID",rs.getInt("userID")+"");
-                user.put("name", rs.getString("name"));
-                user.put("emailID", rs.getString("emailID"));
-                user.put("isAdmin", rs.getInt("isAdmin")+"");
-                users.add(user);
-            }
-            rs.close();
-            ps = con.prepareStatement("select * from items");
-            rs = ps.executeQuery();
-            while(rs.next()) {
-                item = new HashMap<String,String>();
-                item.put("itemID",rs.getInt("itemID")+"");
-                item.put("item", rs.getString("item"));
-                item.put("category", rs.getString("type"));
-                item.put("brand", rs.getString("brand"));
-                item.put("price", rs.getString("price"));
-                item.put("stock", rs.getString("stock"));
-                items.add(item);
-            }
-            rs.close();
-            request.setAttribute("users",users);
-            if(items.size() != 0)
-                request.setAttribute("items",items);
-            request.getRequestDispatcher("admin.jsp").forward(request,response);
-        } catch (Exception e) {
-            out.print(e);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -122,7 +76,50 @@ public class admin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        Path currentRelativePath = Paths.get("");
+        String path = currentRelativePath.toAbsolutePath().toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("jdbc:sqlite:");
+        stringBuilder.append(path);
+        stringBuilder.append("/palacharakkukada.db");
+        String dbUrl = stringBuilder.toString();
+        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
+        ArrayList<String> message = new ArrayList<String>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection con = DriverManager.getConnection(dbUrl);
+            int itemID = Integer.parseInt(request.getParameter("itemID"));
+            String alter = request.getParameter("alter");
+            String dbQuery = "";
+            HttpSession session = request.getSession();
+            if(alter.equals("Update")) {
+                String item = request.getParameter("item");
+                String brand = request.getParameter("brand");
+                String price = request.getParameter("price");
+                String unit = request.getParameter("unit");
+                int stock = Integer.parseInt(request.getParameter("stock"));
+                dbQuery = "update items set item = '" + item
+                            + "', brand = '" + brand
+                            + "', price = '" + price + "/" + unit
+                            + "', stock = " + stock
+                            + " where itemID = " + itemID;
+                message.add("success");
+                message.add("Item updated!");
+                out.print(dbQuery);
+            } else {
+                dbQuery = "delete from items where itemID = " + itemID;
+                message.add("success");
+                message.add("Item deleted!");
+            }
+            PreparedStatement ps = con.prepareStatement(dbQuery);
+            ps.executeUpdate();
+            messages.add(message);
+            session.setAttribute("messages",messages);
+            response.sendRedirect("admin");
+        } catch(Exception e) {
+            out.print(e);
+        }
     }
 
     /**

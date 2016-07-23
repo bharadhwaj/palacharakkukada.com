@@ -22,6 +22,7 @@
     }
     %>
   <jsp:include page="navbar.jsp" />
+  <jsp:include page="flash.jsp" />
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -95,75 +96,88 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="all-products">
-              <div class="panels panel-default">
-                <div class="panels-body">
-                  <table class="table table-striped table-hover ">
-                      <thead>
-                        <tr class="warning">
-                          <th>#</th>
-                          <th>Name</th>
-                          <th>Category</th>
-                          <th>Price</th>
-                          <th>Current Stock</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="default">
-                          <td>1</td>
-                          <td>Rice</td>
-                          <td>Grains</td>
-                          <td>40</td>
-                          <td>1200</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Whear</td>
-                          <td>Grains</td>
-                          <td>55</td>
-                          <td>200</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
-              </div>
+                <%
+                    if(request.getAttribute("items") != null) {
+                        ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>)request.getAttribute("items");
+                %>
+                    <div class="panels panel-default">
+                      <div class="panels-body">
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                              <tr class="warning">
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th>Price</th>
+                                <th>Current Stock</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <% for(HashMap<String,String> item: items){ %>
+                              <tr class="default">
+                                <td>1</td>
+                                <td><%=item.get("item")%></td>
+                                <td><%=item.get("category")%></td>
+                                <td><%=item.get("brand")%></td>
+                                <td><%=item.get("price")%></td>
+                                <td><%=item.get("stock")%></td>
+                              </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                      </div>
+                    </div>
+                <% } else { %>
+                    No items available
+                <% } %>
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="alter-products">
-              <div class="panels panel-default">
-                <div class="panels-body">
+                <%
+                    if(request.getAttribute("items") != null) {
+                        ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>)request.getAttribute("items");
+                %>
+                    <div class="panels panel-default">
+                      <div class="panels-body">
 
-                  <table class="table table-striped table-hover ">
-                      <thead>
-                        <tr class="warning">
-                          <th>#</th>
-                          <th>Name</th>
-                          <th>Category</th>
-                          <th>Price</th>
-                          <th>Current Stock</th>
-                          <th>Remove product</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="default">
-                          <td> 1 </td>
-                          <td><input type="text" value="Rice"> </td>
-                          <td>
-                              <select class="dropdown">
-                                <option>Category 1</option>
-                                <option>Category 2</option>
-                                <option>Category 3</option>
-                              </select>
-                          </td>
-                          <td> <input type="number" class="form-control" id="price" value="40" style="width: 60px;" min="1" > </td>
-                          <td> <input type="number" class="form-control" id="stock" value="200" style="width: 80px;" min="1" > </td>
-                          <td><a href="#" class="btn btn-danger">Remove</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                              <tr class="warning">
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Brand name</th>
+                                <th>Price</th>
+                                <th>Current Stock</th>
+                                <th>Update</th>
+                                <th>Remove product</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <% for(HashMap<String,String> item: items){ %>
+                                <form action="AlterProducts" method="post">
+                                    <input type="hidden" value="<%=item.get("itemID")%>" name="itemID">
+                                    <tr class="default">
+                                      <td> 1 </td>
+                                      <td><input name="item" type="text" value="<%=item.get("item")%>"> </td>
+                                      <td><input name="brand" type="text" value="<%=item.get("brand")%>"> </td>
+                                      <td>
+                                          <input name="price" type="number" class="form-control" id="price" value="<%=item.get("price").split("/")[0]%>" style="width: 60px;" min="1" >
+                                          <input type="hidden" name="unit" value="<%=item.get("price").split("/")[1]%>">
+                                      </td>
+                                      <td> <input name="stock" type="number" class="form-control" id="stock" value="<%=item.get("stock")%>" style="width: 80px;" min="1" > </td>
+                                      <td><input type="submit" name="alter" value="Update" class="btn btn-success"></td>
+                                      <td><input type="submit" name="alter" value="Remove" class="btn btn-danger"></td>
+                                    </tr>
+                                  </form>
+                                <% } %>
+                            </tbody>
+                          </table>
 
 
-                </div>
-              </div>
+                      </div>
+                    </div>
+                <% } %>
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="add-products">
