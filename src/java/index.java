@@ -91,6 +91,7 @@ public class index extends HttpServlet {
                 items.add(item);
                 //out.println(item.get(0));
             }
+            rs.close();
             HttpSession session=request.getSession();
             session.setAttribute("items",items);
             response.sendRedirect("index.jsp");
