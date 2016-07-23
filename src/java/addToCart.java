@@ -121,6 +121,7 @@ public class addToCart extends HttpServlet {
                     
                 }
                     
+                String strMsg = "";
                 
                 if(checkIfRs == 0) {
                     rs.close();
@@ -139,12 +140,13 @@ public class addToCart extends HttpServlet {
                     ps.setString(5,actualPrice);
                     ps.executeUpdate();
                     rS.close();
+                    strMsg = item + " added to the cart!"
                 }
                     
                     con.close();
                     
                     message.add("success");
-                    message.add("Item added to cart!");
+                    message.add(strMsg);
                     messages.add(message);
                     session.setAttribute("messages",messages);
                     response.sendRedirect("index.jsp");
