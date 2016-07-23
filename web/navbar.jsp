@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -11,53 +14,62 @@
       <span class="glyphicon glyphicon-home" aria-hidden="true"> </span> palacharakkukada.com
       </a>
     </div>
+      <%
+          HashMap<String,ArrayList<String>> categories = (HashMap<String,ArrayList<String>>)session.getAttribute("categories");
+      %>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
+        <% if(categories.get("Grains") != null) {%>
         <li class="dropdown">
+            
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grains <span class="caret"></span></a>
           <ul class="dropdown-menu open" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+              <% for(String item: categories.get("Grains")) {%>
+                <li><a href="#"><%=item%></a></li>
+              <% }%>
           </ul>
         </li>
-
+        <% } %>
+        <% if(categories.get("Beverages") != null) {%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Beverages <span class="caret"></span></a>
           <ul class="dropdown-menu open" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% for(String item: categories.get("Beverages")) {%>
+                <li><a href="#"><%=item%></a></li>
+            <% }%>
           </ul>
         </li>
-
+        <% } %>
+        <% if(categories.get("Grocery") != null) {%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grocery <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% for(String item: categories.get("Grocery")) {%>
+                <li><a href="#"><%=item%></a></li>
+            <% }%>
           </ul>
         </li>
-
+        <% } %>
+        <% if(categories.get("Stationary") != null) {%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stationary <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% for(String item: categories.get("Stationary")) {%>
+                <li><a href="#"><%=item%></a></li>
+            <% }%>
           </ul>
         </li>
-
+        <% } %>
+        <% if(categories.get("Others") != null) {%>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Others <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% for(String item: categories.get("Others")) {%>
+                <li><a href="#"><%=item%></a></li>
+            <% }%>
           </ul>
         </li>
-
+        <% } %>
       </ul>
       <form action="search" method="get" class="navbar-form navbar-left" role="search">
        <div class="input-group">
