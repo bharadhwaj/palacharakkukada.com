@@ -32,7 +32,7 @@
         <% if(categories.get("Grains") != null) {%>
         <li class="dropdown">
             
-          <a href="search?search=Grains" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Grains <span class="caret"></span></a>
+          <a href="search?search=Grains" class="dropdown-toggle"  role="button" aria-expanded="false">Grains <span class="caret"></span></a>
           <ul class="dropdown-menu open" role="menu">
               <% for(String item: categories.get("Grains")) {%>
                 <li><a href="#"><%=item%></a></li>
@@ -42,7 +42,7 @@
         <% } %>
         <% if(categories.get("Beverages") != null) {%>
         <li class="dropdown">
-          <a href="search?search=Beverages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Beverages <span class="caret"></span></a>
+          <a href="search?search=Beverages" class="dropdown-toggle" role="button" aria-expanded="false">Beverages <span class="caret"></span></a>
           <ul class="dropdown-menu open" role="menu">
             <% for(String item: categories.get("Beverages")) {%>
                 <li><a href="#"><%=item%></a></li>
@@ -62,7 +62,7 @@
         <% } %>
         <% if(categories.get("Stationary") != null) {%>
         <li class="dropdown">
-          <a href="search?search=Stationary" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Stationary <span class="caret"></span></a>
+          <a href="search?search=Stationary" class="dropdown-toggle" role="button" aria-expanded="false">Stationary <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <% for(String item: categories.get("Stationary")) {%>
                 <li><a href="#"><%=item%></a></li>
@@ -72,7 +72,7 @@
         <% } %>
         <% if(categories.get("Others") != null) {%>
         <li class="dropdown">
-          <a href="search?search=Others" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Others <span class="caret"></span></a>
+          <a href="search?search=Others" class="dropdown-toggle" role="button" aria-expanded="false">Others <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <% for(String item: categories.get("Others")) {%>
                 <li><a href="#"><%=item%></a></li>
